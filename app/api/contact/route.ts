@@ -56,7 +56,9 @@ export async function POST(req: Request) {
   const results: { sink: string; ok: boolean }[] = [];
 
   // — Supabase: insert into leads —
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  // Accept either name: NEXT_PUBLIC_SUPABASE_URL (this repo's .env.example)
+  // or SUPABASE_URL (the conventional server-side name, used on Vercel).
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (supabaseUrl && supabaseKey) {
     try {
