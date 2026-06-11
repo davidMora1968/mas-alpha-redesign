@@ -1,0 +1,164 @@
+import type { Metadata } from 'next';
+import { Eyebrow } from '@/components/ui/Eyebrow';
+import { Reveal } from '@/components/ui/Reveal';
+import { Button } from '@/components/ui/Button';
+
+export const metadata: Metadata = {
+  title: 'Press',
+  description: 'What’s being said about the places we steward.',
+  alternates: { canonical: '/press' },
+  openGraph: {
+    title: 'Press',
+    description: 'What’s being said about the places we steward.',
+    images: ['/assets/imagery/miami-shoreline.jpg'],
+  },
+};
+
+const FEATURED = {
+  outlet: 'Cowboy State Daily',
+  headline: 'New Owner of Meadowlark Ski Resort Says He Wants to Keep It Small',
+  date: 'May 15, 2026',
+  line: 'A profile of how Mas Alpha’s MAS Tierra plans to preserve Meadowlark as a small, accessible Wyoming basecamp rather than a luxury mega-resort.',
+  linkLabel: 'Read at Cowboy State Daily →',
+} as const;
+
+const STORIES = [
+  { outlet: 'POWDER', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
+  { outlet: 'AOL', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
+  { outlet: 'Unofficial Networks', headline: 'New Owner of Wyoming Ski Resort Details Future Vision', date: 'May 2026' },
+  { outlet: 'Adventure Sports Network', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
+  { outlet: 'Northern Wyoming News', headline: 'New Ownership for Meadowlark Ski & Lake Lodge', date: 'May 2026' },
+] as const;
+
+const OUTLETS = [
+  'Cowboy State Daily',
+  'POWDER',
+  'AOL',
+  'Unofficial Networks',
+  'Adventure Sports Network',
+  'Northern Wyoming News',
+] as const;
+
+/** Navy page header — sits under the fixed transparent nav. */
+function PressHeader() {
+  return (
+    <section aria-label="Press header" className="gutter bg-navy-950 pb-24 pt-[200px]">
+      <div className="content">
+        <Reveal>
+          <Eyebrow>In the Press</Eyebrow>
+        </Reveal>
+        <Reveal delay={150}>
+          <h1 className="type-display-xl mt-9 text-stone-50">Press.</h1>
+        </Reveal>
+        <Reveal delay={300}>
+          <p className="type-lede mt-9 max-w-[28em] text-navy-100">
+            What’s being said about the places we steward.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** Featured story on cream — gold-ruled, outlet rail + serif headline in quotes. */
+function PressFeatured() {
+  return (
+    <section aria-label="Featured story" className="gutter bg-stone-100 py-36">
+      <div className="content">
+        <Reveal>
+          <div className="grid grid-cols-[4fr_8fr] items-start gap-16 border-t border-[var(--hairline-gold)] pt-10 max-[900px]:grid-cols-1 max-[900px]:gap-10">
+            <div className="flex flex-col gap-[14px]">
+              <span className="type-eyebrow text-gold-500">Featured</span>
+              <span className="text-navy-900 [font:300_22px/1.3_var(--font-serif-display)]">
+                {FEATURED.outlet}
+              </span>
+              <span className="type-caption uppercase tracking-[0.08em] text-ink-600">
+                {FEATURED.date}
+              </span>
+            </div>
+            <div>
+              <h2 className="type-display-lg max-w-[16em] text-balance text-navy-900">
+                “{FEATURED.headline}”
+              </h2>
+              <p className="type-body mt-7 max-w-[36em] text-ink-900">{FEATURED.line}</p>
+              <div className="mt-9">
+                {/* Real article URLs were never supplied — '#' per the design source. */}
+                <Button variant="text" onDark={false} href="#">
+                  {FEATURED.linkLabel}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** Coverage ledger — hairline-ruled rows: outlet · serif headline · date →. */
+function PressLedger() {
+  return (
+    <section aria-label="Coverage" className="gutter bg-stone-100 pb-36">
+      <div className="content">
+        <Reveal>
+          <div className="grid">
+            {STORIES.map((story) => (
+              <a
+                key={story.outlet}
+                href="#"
+                className="group grid grid-cols-[4fr_7fr_1fr] items-baseline gap-10 border-t border-[var(--hairline-navy)] py-[34px] no-underline max-[900px]:grid-cols-1 max-[900px]:gap-3"
+              >
+                <span className="type-eyebrow text-gold-500">{story.outlet}</span>
+                <span className="text-navy-900 transition-colors duration-[240ms] ease-reveal group-hover:text-gold-500 [font:300_clamp(20px,1.8vw,26px)/1.35_var(--font-serif-display)]">
+                  {story.headline}
+                </span>
+                <span className="type-caption whitespace-nowrap text-right uppercase tracking-[0.08em] text-ink-600 max-[900px]:text-left">
+                  {story.date} →
+                </span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** Centered navy strip — all six publication names in quiet serif. */
+function PressFeaturedIn() {
+  return (
+    <section
+      aria-label="As featured in"
+      className="gutter border-t border-[var(--hairline-gold-faint)] bg-navy-950 py-24"
+    >
+      <div className="content flex flex-col items-center gap-10">
+        <Reveal>
+          <span className="type-eyebrow text-navy-300">As Featured In</span>
+        </Reveal>
+        <Reveal delay={150}>
+          <div className="flex flex-wrap items-baseline justify-center gap-x-16 gap-y-6">
+            {OUTLETS.map((outlet) => (
+              <span
+                key={outlet}
+                className="whitespace-nowrap text-navy-100 [font:300_clamp(17px,1.5vw,22px)/1.3_var(--font-serif-display)]"
+              >
+                {outlet}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export default function PressPage() {
+  return (
+    <main>
+      <PressHeader />
+      <PressFeatured />
+      <PressLedger />
+      <PressFeaturedIn />
+    </main>
+  );
+}

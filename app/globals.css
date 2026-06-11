@@ -1,0 +1,169 @@
+/* ============================================================
+   MAS ALPHA SECURITIES — GLOBAL STYLES (Next.js + Tailwind v4)
+   Tokens carried from the design system (Claude Design handoff).
+   Deep navy dominates. Stone breathes. Gold is a whisper.
+   Square corners. Slow reveals, no bounce.
+   ============================================================ */
+@import "tailwindcss";
+
+@theme {
+  /* — Colors (generate bg-/text-/border- utilities) — */
+  --color-navy-950: #060F1D;
+  --color-navy-900: #0A1B33; /* brand base */
+  --color-navy-800: #0E2240;
+  --color-navy-700: #16304F;
+  --color-navy-300: #8FA1B8;
+  --color-navy-100: #C9D3E0;
+  --color-stone-50: #FAF7F0;
+  --color-stone-100: #F4EFE6; /* light page */
+  --color-stone-200: #ECE4D4;
+  --color-stone-300: #DDD1BA;
+  --color-gold-300: #D8C49A;
+  --color-gold-400: #C2A36B; /* brand accent */
+  --color-gold-500: #A8884F;
+  --color-ink-900: #16263F;
+  --color-ink-600: #44536B;
+
+  /* — Fonts (next/font variables set on <html>) — */
+  --font-serif-display: var(--font-spectral), 'Iowan Old Style', Georgia, serif;
+  --font-grotesque: var(--font-hanken), 'Helvetica Neue', system-ui, sans-serif;
+
+  /* — Motion — */
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  /* — Semantic: surfaces — */
+  --surface-page: var(--color-stone-100);
+  --surface-dark: var(--color-navy-900);
+
+  /* — Semantic: text — */
+  --text-body: var(--color-ink-900);
+  --text-secondary: var(--color-ink-600);
+  --text-on-dark: var(--color-stone-50);
+  --text-on-dark-muted: var(--color-navy-100);
+  --text-on-dark-dim: var(--color-navy-300);
+
+  /* — Hairlines — */
+  --hairline-gold: rgba(194, 163, 107, 0.45);
+  --hairline-gold-faint: rgba(194, 163, 107, 0.22);
+  --hairline-on-dark: rgba(244, 239, 230, 0.14);
+  --hairline-navy: rgba(10, 27, 51, 0.16);
+
+  /* — Image protection scrims — */
+  --scrim-hero: linear-gradient(180deg, rgba(6,15,29,0.42) 0%, rgba(6,15,29,0.12) 36%, rgba(10,27,51,0.46) 68%, rgba(6,15,29,0.94) 100%);
+  --scrim-panel: linear-gradient(180deg, rgba(6,15,29,0.10) 0%, rgba(6,15,29,0.34) 55%, rgba(6,15,29,0.82) 100%);
+
+  /* — The single permitted shadow: the scrolled nav — */
+  --shadow-nav: 0 10px 30px rgba(4, 10, 20, 0.35);
+
+  /* — Type shorthands (font: …) — */
+  --type-display-xl: 200 clamp(56px, 7.5vw, 108px)/1.04 var(--font-serif-display);
+  --type-display-lg: 300 clamp(38px, 4.4vw, 60px)/1.08 var(--font-serif-display);
+  --type-display-md: 300 clamp(26px, 2.6vw, 36px)/1.16 var(--font-serif-display);
+  --type-quote: italic 300 clamp(24px, 2.4vw, 34px)/1.35 var(--font-serif-display);
+  --type-numeral: 200 clamp(48px, 5vw, 76px)/1 var(--font-serif-display);
+  --type-lede: 400 clamp(17px, 1.4vw, 21px)/1.6 var(--font-grotesque);
+  --type-body: 400 16px/1.7 var(--font-grotesque);
+  --type-body-sm: 400 14px/1.65 var(--font-grotesque);
+  --type-caption: 400 12.5px/1.6 var(--font-grotesque);
+  --type-eyebrow: 600 11.5px/1.4 var(--font-grotesque);
+  --type-button: 600 12.5px/1 var(--font-grotesque);
+  --type-nav: 500 13px/1 var(--font-grotesque);
+
+  /* — Tracking — */
+  --tracking-display: -0.015em;
+  --tracking-eyebrow: 0.22em;
+  --tracking-button: 0.14em;
+  --tracking-nav: 0.06em;
+
+  /* — Numerals: proportional lining figures — */
+  --display-feature-settings: 'pnum' 1, 'lnum' 1;
+
+  /* — Layout — */
+  --page-gutter: clamp(24px, 5vw, 72px);
+  --content-max: 1320px;
+  --measure: 760px;
+
+  /* — Motion — */
+  --duration-slow: 900ms;
+  --duration-med: 350ms;
+  --reveal-rise: 28px;
+}
+
+/* ---------- Base ----------
+   Inside @layer base so Tailwind utilities and the .type-* helpers
+   (later layers) can override these element defaults — un-layered
+   rules would beat every layered utility regardless of specificity. */
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font: var(--type-body);
+    color: var(--text-body);
+    background: var(--color-navy-950);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    margin: 0;
+    font-family: var(--font-serif-display);
+    font-weight: 300;
+    color: inherit;
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  p { margin: 0; text-wrap: pretty; }
+
+  img { display: block; max-width: 100%; }
+
+  ::selection { background: rgba(194, 163, 107, 0.30); }
+
+  :focus-visible { outline: 1px solid var(--color-gold-400); outline-offset: 3px; }
+}
+
+/* ---------- Type helpers (font shorthands + tracking) ---------- */
+@layer components {
+  .type-display-xl { font: var(--type-display-xl); letter-spacing: var(--tracking-display); }
+  .type-display-lg { font: var(--type-display-lg); letter-spacing: var(--tracking-display); }
+  .type-display-md { font: var(--type-display-md); letter-spacing: var(--tracking-display); }
+  .type-quote     { font: var(--type-quote); }
+  .type-numeral   { font: var(--type-numeral); font-feature-settings: var(--display-feature-settings); }
+  .type-lede      { font: var(--type-lede); }
+  .type-body      { font: var(--type-body); }
+  .type-body-sm   { font: var(--type-body-sm); }
+  .type-caption   { font: var(--type-caption); }
+  .type-eyebrow   { font: var(--type-eyebrow); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; }
+  .type-button    { font: var(--type-button); letter-spacing: var(--tracking-button); text-transform: uppercase; }
+  .type-nav       { font: var(--type-nav); letter-spacing: var(--tracking-nav); }
+
+  /* Page gutter + content width shorthands */
+  .gutter { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .content { max-width: var(--content-max); margin-left: auto; margin-right: auto; }
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes ma-scroll-cue {
+  0% { transform: translateY(-40px); }
+  60%, 100% { transform: translateY(76px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-brand-in {
+    opacity: 0;
+    transform: translateY(8px);
+    letter-spacing: 0.04em;
+    animation: mas-brand-in 1400ms var(--ease-reveal) 250ms forwards;
+  }
+  @keyframes mas-brand-in {
+    to { opacity: 1; transform: translateY(0); letter-spacing: 0; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ma-scroll-cue-dash { animation: none !important; }
+}
