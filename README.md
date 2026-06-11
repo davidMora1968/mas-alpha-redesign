@@ -46,6 +46,18 @@ form that POSTs to `app/api/contact/route.ts`, which inserts into the Supabase
 once with [`supabase/leads.sql`](supabase/leads.sql). Spam control: honeypot
 field + length caps + control-character stripping.
 
+## The Monday Brief
+
+`app/api/brief/route.ts` + the cron in `vercel.json` send a weekly internal
+briefing (Mondays 12:00 UTC ≈ 8am Miami) to `BRIEF_RECIPIENTS`: new partner
+inquiries from the past week (Supabase `leads`), fresh press coverage
+(Google News for "Mas Alpha Securities" / "Meadowlark Ski" / "MAS Tierra"),
+and a week-ahead focus list (edit `WEEK_AHEAD` in the route). Requires
+`CRON_SECRET` (auth) and `RESEND_API_KEY` (sending). Preview without sending
+(the secret travels in a header, never a URL):
+`curl -H "Authorization: Bearer $CRON_SECRET" "https://<site>/api/brief?dry=1"`.
+Cadence: edit the cron expression (`0 12 * * 1` → `0 12 * * *` for daily).
+
 ## Routes
 
 `/` (homepage) · `/approach` · `/verticals` · `/portfolio` · `/partners-club`

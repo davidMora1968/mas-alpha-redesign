@@ -87,7 +87,7 @@ export async function POST(req: Request) {
     try {
       const resend = new Resend(resendKey);
       const { error } = await resend.emails.send({
-        from: process.env.CONTACT_FROM_EMAIL ?? 'Mas Alpha Securities <onboarding@resend.dev>',
+        from: process.env.CONTACT_FROM_EMAIL || 'Mas Alpha Securities <onboarding@resend.dev>',
         to: [notifyTo],
         replyTo: email,
         subject: `New partner inquiry — ${name}`,
