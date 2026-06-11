@@ -9,7 +9,7 @@ import { PRINCIPLES } from './principles';
  */
 export function ApproachPrinciples() {
   return (
-    <section aria-label="Principles" className="gutter bg-stone-100 pb-36">
+    <section aria-label="Principles" className="gutter bg-stone-100 pb-36 max-[640px]:pb-20">
       <div className="content">
         {PRINCIPLES.map((p) => (
           <Reveal key={p.id}>

@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function Closing() {
   return (
-    <section className="gutter border-t border-[var(--hairline-gold-faint)] bg-navy-900 py-36">
+    <section className="gutter border-t border-[var(--hairline-gold-faint)] bg-navy-900 py-36 max-[640px]:py-20">
       <Reveal>
         <div className="content flex flex-col items-start gap-10">
           <h2 className="type-display-lg max-w-[14em] text-balance text-stone-50">

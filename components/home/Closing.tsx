@@ -14,7 +14,7 @@ export function Closing() {
     <section
       id="partner"
       aria-label="Partner with Mas Alpha"
-      className="bg-navy-900 gutter py-[200px] text-center"
+      className="bg-navy-900 gutter py-[200px] text-center max-[640px]:py-24"
     >
       <Reveal className="flex flex-col items-center gap-9">
         <Image

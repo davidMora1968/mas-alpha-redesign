@@ -82,10 +82,13 @@ function CountUp({
 /** .stat — padding + gold hairline; first cell of each row is flush. */
 function statClass(i: number): string {
   const base = 'flex flex-col gap-3';
-  if (i === 0) return base; // first of row in both layouts
-  const bordered = `${base} border-l border-[var(--hairline-gold-faint)] px-5`;
-  if (i % 3 === 0) return `${bordered} max-[1100px]:border-l-0 max-[1100px]:px-0`;
-  return bordered;
+  if (i === 0) return base; // first of row in every layout
+  let cls = `${base} border-l border-[var(--hairline-gold-faint)] px-5`;
+  // Row starts in the 3-col layout (641–1100px) drop the divider there…
+  if (i % 3 === 0) cls += ' min-[641px]:max-[1100px]:border-l-0 min-[641px]:max-[1100px]:px-0';
+  // …and row starts in the 2-col layout (≤640px) drop it there.
+  if (i % 2 === 0) cls += ' max-[640px]:border-l-0 max-[640px]:px-0';
+  return cls;
 }
 
 export function CredibilityBand() {
@@ -101,7 +104,7 @@ export function CredibilityBand() {
       aria-label="Firm facts"
       className="gutter border-y border-[var(--hairline-gold-faint)] bg-navy-900 py-24"
     >
-      <div className="content grid grid-cols-6 max-[1100px]:grid-cols-3 max-[1100px]:gap-y-10">
+      <div className="content grid grid-cols-6 max-[1100px]:grid-cols-3 max-[1100px]:gap-y-10 max-[640px]:grid-cols-2">
         {STATS.map((stat, i) => {
           const cell = (
             <div className={statClass(i)}>

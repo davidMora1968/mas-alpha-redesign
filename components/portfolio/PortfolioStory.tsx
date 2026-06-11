@@ -15,7 +15,7 @@ const FACTS: [string, string][] = [
  */
 export function PortfolioStory() {
   return (
-    <section aria-label="Land-led hospitality" className="gutter bg-stone-100 py-36">
+    <section aria-label="Land-led hospitality" className="gutter bg-stone-100 py-36 max-[640px]:py-20">
       <div className="content">
         <div className="grid grid-cols-[5fr_7fr] items-start gap-24 max-[900px]:grid-cols-1 max-[900px]:gap-16">
           <Reveal>
@@ -52,7 +52,7 @@ export function PortfolioStory() {
           </Reveal>
         </div>
       </div>
-      <Reveal className="mt-24">
+      <Reveal className="mt-24 max-[640px]:mt-16">
         <ImagePanel
           src="/assets/imagery/meadowlark-snowboard.avif"
           alt="A snowboarder carving through deep powder at Meadowlark"

@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Verticals',
     description,
-    images: ['/assets/imagery/meadowlark-snowboard.avif'],
   },
 };
 

@@ -75,7 +75,7 @@ const TILES: Tile[] = [
 
 export function ExploreGrid() {
   return (
-    <section id="explore" aria-label="Explore the firm" className="gutter bg-navy-950 py-36">
+    <section id="explore" aria-label="Explore the firm" className="gutter bg-navy-950 py-36 max-[640px]:py-20">
       <div className="content">
         <Reveal>
           <Eyebrow>Explore the Firm</Eyebrow>
@@ -86,7 +86,7 @@ export function ExploreGrid() {
               <Link
                 key={tile.href}
                 href={tile.href}
-                className={`group relative block overflow-hidden bg-navy-800 border border-[var(--hairline-gold-faint)] hover:border-[var(--hairline-gold)] transition-[border-color] duration-[350ms] ease-reveal ${tile.span} ${tile.height} max-[900px]:col-span-12`}
+                className={`group relative block overflow-hidden bg-navy-800 border border-[var(--hairline-gold-faint)] hover:border-[var(--hairline-gold)] transition-[border-color] duration-[350ms] ease-reveal ${tile.span} ${tile.height} max-[900px]:col-span-12 max-[640px]:h-[300px]`}
               >
                 <div className="absolute inset-0 transform-gpu scale-100 transition-transform duration-[1600ms] ease-reveal group-hover:scale-[1.03] motion-reduce:transition-none">
                   <Image

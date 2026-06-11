@@ -22,7 +22,7 @@ const PILLARS: [string, string][] = [
  */
 export function ClubExperience() {
   return (
-    <section aria-label="The Partner Experience" className="gutter bg-stone-100 py-36">
+    <section aria-label="The Partner Experience" className="gutter bg-stone-100 py-36 max-[640px]:py-20">
       <div className="content">
         <Reveal>
           <SectionHeading
@@ -33,7 +33,7 @@ export function ClubExperience() {
           />
         </Reveal>
         <Reveal delay={180}>
-          <div className="mt-24 grid grid-cols-3 gap-10 max-[900px]:grid-cols-1">
+          <div className="mt-24 grid grid-cols-3 gap-10 max-[900px]:grid-cols-1 max-[640px]:mt-16">
             {PILLARS.map(([title, body]) => (
               <div key={title} className="border-t border-[var(--hairline-gold)] pt-[26px]">
                 <h3

@@ -8,7 +8,7 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function ApproachQuote() {
   return (
-    <section aria-label="Philosophy statement" className="gutter bg-stone-100 py-[200px]">
+    <section aria-label="Philosophy statement" className="gutter bg-stone-100 py-[200px] max-[640px]:py-24">
       <div className="content grid grid-cols-[2fr_9fr_1fr] items-start max-lg:grid-cols-1">
         <div />
         <div>

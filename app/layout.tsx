@@ -21,6 +21,11 @@ const hanken = Hanken_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  // Client-demo mode: keep the vercel.app preview out of search indexes
+  // until the firm's real domain goes live (see app/robots.ts).
+  ...(process.env.DEMO_NOINDEX === '1'
+    ? { robots: { index: false, follow: false } }
+    : {}),
   title: {
     default: 'Mas Alpha Securities — We own what cannot be replaced',
     template: '%s — Mas Alpha Securities',
@@ -33,9 +38,12 @@ export const metadata: Metadata = {
     title: 'Mas Alpha Securities — We own what cannot be replaced',
     description:
       'Mas Alpha Securities deploys private capital to acquire premier, irreplaceable real assets across the United States — and holds them for the long term.',
-    images: ['/assets/imagery/miami-shoreline.jpg'],
+    // og:image comes from app/opengraph-image.tsx (branded card)
   },
-  icons: { icon: '/assets/logos/mas-icon.png' },
+  icons: {
+    icon: '/assets/logos/mas-icon.png',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 const organizationJsonLd = {

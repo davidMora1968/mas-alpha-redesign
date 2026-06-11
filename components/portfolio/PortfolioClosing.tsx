@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function PortfolioClosing() {
   return (
-    <section aria-label="Closing invitation" className="gutter bg-navy-900 pb-36">
+    <section aria-label="Closing invitation" className="gutter bg-navy-900 pb-36 max-[640px]:pb-20">
       <Reveal>
         <div className="content flex flex-col items-start gap-10 border-t border-[var(--hairline-gold-faint)] pt-24">
           <h2 className="type-display-lg max-w-[13em] text-stone-50">

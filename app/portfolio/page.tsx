@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Portfolio',
     description,
-    images: ['/assets/imagery/wyoming-range.avif'],
   },
 };
 

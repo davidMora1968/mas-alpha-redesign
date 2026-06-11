@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function Philosophy() {
   return (
-    <section id="approach" aria-label="Philosophy" className="gutter bg-stone-100 py-[200px]">
+    <section id="approach" aria-label="Philosophy" className="gutter bg-stone-100 py-[200px] max-[640px]:py-24">
       <div className="content flex flex-col items-start gap-10">
         <Reveal>
           <Eyebrow onDark={false}>Our Approach</Eyebrow>

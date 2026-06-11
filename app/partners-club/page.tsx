@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     title: 'The MAS Partners Club',
     description:
       'Partnership extends beyond capital — a concierge relationship and a calendar kept intentionally small.',
-    images: ['/assets/imagery/club-night-pavilion.jpg'],
   },
 };
 

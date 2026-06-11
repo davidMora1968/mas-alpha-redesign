@@ -32,11 +32,11 @@ export function ApproachHero() {
       </div>
 
       {/* Index strip — hairline-ruled anchors down to each principle */}
-      <Reveal delay={450} className="mt-[88px]">
+      <Reveal delay={450} className="mt-[88px] max-[640px]:mt-16">
         <div className="border-t border-[var(--hairline-gold-faint)]">
           <nav
             aria-label="Principles index"
-            className="content gutter flex flex-wrap gap-16 py-7"
+            className="content gutter flex flex-wrap gap-16 py-7 max-[640px]:gap-x-10 max-[640px]:gap-y-5"
           >
             {PRINCIPLES.map((p) => (
               <a

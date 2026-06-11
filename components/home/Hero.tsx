@@ -102,10 +102,10 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Scroll cue */}
+      {/* Scroll cue — hidden on phones, where it collides with the content stack */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 flex flex-col items-center gap-3.5"
+        className="absolute bottom-0 flex flex-col items-center gap-3.5 max-[640px]:hidden"
         style={{ right: 'var(--page-gutter)' }}
       >
         <span className="type-eyebrow text-navy-300 [writing-mode:vertical-rl]">Scroll</span>

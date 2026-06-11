@@ -30,7 +30,7 @@ export function VerticalsHero() {
       </div>
       <Reveal delay={300} className="mt-20">
         <div className="border-t border-[var(--hairline-gold-faint)]">
-          <div className="content gutter flex flex-wrap gap-16 py-7">
+          <div className="content gutter flex flex-wrap gap-16 py-7 max-[640px]:gap-x-10 max-[640px]:gap-y-5">
             {VERTICALS.map((v) => (
               <a
                 key={v.id}

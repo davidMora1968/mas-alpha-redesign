@@ -10,7 +10,7 @@ export function ApproachClosing() {
   return (
     <section
       aria-label="Partner with Mas Alpha"
-      className="gutter border-t border-[var(--hairline-gold-faint)] bg-navy-900 py-36"
+      className="gutter border-t border-[var(--hairline-gold-faint)] bg-navy-900 py-36 max-[640px]:py-20"
     >
       <Reveal>
         <div className="content flex flex-col items-start gap-10">

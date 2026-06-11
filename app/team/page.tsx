@@ -14,9 +14,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Team',
     description,
-    // The team hero is a pure navy stage with no photograph; fall back
-    // to the site's signature hero image for link previews.
-    images: ['/assets/imagery/miami-shoreline.jpg'],
   },
 };
 

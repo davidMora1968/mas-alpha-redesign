@@ -90,7 +90,9 @@ export function PartnerCta() {
         >
           Become a Partner
         </Button>
-        <Button size="lg">Investor Portal</Button>
+        <Button size="lg" href="/portal">
+          Investor Portal
+        </Button>
       </div>
 
       {open && (

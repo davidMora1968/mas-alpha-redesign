@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
-import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Press',
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Press',
     description: 'What’s being said about the places we steward.',
-    images: ['/assets/imagery/miami-shoreline.jpg'],
   },
 };
 
@@ -20,14 +18,15 @@ const FEATURED = {
   date: 'May 15, 2026',
   line: 'A profile of how Mas Alpha’s MAS Tierra plans to preserve Meadowlark as a small, accessible Wyoming basecamp rather than a luxury mega-resort.',
   linkLabel: 'Read at Cowboy State Daily →',
+  href: 'https://cowboystatedaily.com/2026/05/15/new-owner-of-meadowlark-ski-resort-says-he-wants-to-keep-it-small/',
 } as const;
 
 const STORIES = [
-  { outlet: 'POWDER', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
-  { outlet: 'AOL', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
-  { outlet: 'Unofficial Networks', headline: 'New Owner of Wyoming Ski Resort Details Future Vision', date: 'May 2026' },
-  { outlet: 'Adventure Sports Network', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026' },
-  { outlet: 'Northern Wyoming News', headline: 'New Ownership for Meadowlark Ski & Lake Lodge', date: 'May 2026' },
+  { outlet: 'POWDER', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026', href: 'https://www.powder.com/news/new-owner-meadowlark-ski-area-wyoming' },
+  { outlet: 'AOL', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026', href: 'https://www.aol.com/articles/meet-owner-meadowlark-ski-area-110800000.html' },
+  { outlet: 'Unofficial Networks', headline: 'New Owner of Wyoming Ski Resort Details Future Vision', date: 'May 2026', href: 'https://unofficialnetworks.com/2026/05/22/meadowlark-new-owner-plans/' },
+  { outlet: 'Adventure Sports Network', headline: 'Meet the New Owner of Meadowlark Ski Area, Wyoming', date: 'May 2026', href: 'https://www.adventuresportsnetwork.com/ski/new-owner-meadowlark-ski-area-wyoming' },
+  { outlet: 'Northern Wyoming News', headline: 'New Ownership for Meadowlark Ski & Lake Lodge', date: 'May 2026', href: 'https://www.wyodaily.com/story/2026/05/14/news/new-ownership-for-meadowlark-ski-and-lake-lodge/17826.html' },
 ] as const;
 
 const OUTLETS = [
@@ -82,10 +81,16 @@ function PressFeatured() {
               </h2>
               <p className="type-body mt-7 max-w-[36em] text-ink-900">{FEATURED.line}</p>
               <div className="mt-9">
-                {/* Real article URLs were never supplied — '#' per the design source. */}
-                <Button variant="text" onDark={false} href="#">
+                {/* Plain anchor mirroring Button variant="text" onDark={false} —
+                    the shared Button doesn't pass target/rel for external links. */}
+                <a
+                  href={FEATURED.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="type-button inline-flex items-center justify-center gap-2.5 cursor-pointer whitespace-nowrap no-underline rounded-none transition-[background-color,color,border-color] duration-[350ms] ease-reveal text-navy-900 px-0.5 py-1 bg-transparent border-b border-[var(--hairline-gold)] hover:text-gold-400"
+                >
                   {FEATURED.linkLabel}
-                </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -105,7 +110,9 @@ function PressLedger() {
             {STORIES.map((story) => (
               <a
                 key={story.outlet}
-                href="#"
+                href={story.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group grid grid-cols-[4fr_7fr_1fr] items-baseline gap-10 border-t border-[var(--hairline-navy)] py-[34px] no-underline max-[900px]:grid-cols-1 max-[900px]:gap-3"
               >
                 <span className="type-eyebrow text-gold-500">{story.outlet}</span>

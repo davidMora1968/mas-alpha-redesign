@@ -26,8 +26,8 @@ const EVENTS: [string, string, string][] = [
  */
 export function ClubCalendar() {
   return (
-    <section aria-label="Curated events" className="gutter bg-navy-950 py-36">
-      <div className="content grid grid-cols-[5fr_7fr] items-start gap-24 max-[900px]:grid-cols-1">
+    <section aria-label="Curated events" className="gutter bg-navy-950 py-36 max-[640px]:py-20">
+      <div className="content grid grid-cols-[5fr_7fr] items-start gap-24 max-[900px]:grid-cols-1 max-[900px]:gap-16">
         <Reveal>
           <div>
             <Eyebrow>Curated Events</Eyebrow>
@@ -45,7 +45,7 @@ export function ClubCalendar() {
             {EVENTS.map(([num, title, line]) => (
               <div
                 key={title}
-                className="grid grid-cols-[76px_1fr] items-baseline gap-[26px] border-t border-[var(--hairline-gold-faint)] py-[34px]"
+                className="grid grid-cols-[76px_1fr] items-baseline gap-[26px] border-t border-[var(--hairline-gold-faint)] py-[34px] max-[640px]:grid-cols-[56px_1fr] max-[640px]:gap-4"
               >
                 <span className="type-eyebrow whitespace-nowrap text-gold-400">{num}</span>
                 <div>

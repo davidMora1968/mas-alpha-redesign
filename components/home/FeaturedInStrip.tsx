@@ -23,7 +23,7 @@ export function FeaturedInStrip() {
       <Reveal>
         <Link
           href="/press"
-          className="content flex flex-wrap items-baseline justify-center gap-x-16 gap-y-4 no-underline"
+          className="content flex flex-wrap items-baseline justify-center gap-x-16 gap-y-4 no-underline max-[640px]:gap-x-10"
         >
           <span className="type-eyebrow text-navy-300">As Featured In</span>
           {OUTLETS.map((outlet) => (

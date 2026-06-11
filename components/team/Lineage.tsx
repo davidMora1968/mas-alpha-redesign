@@ -14,7 +14,7 @@ const FACTS: ReadonlyArray<readonly [string, string]> = [
  */
 export function Lineage() {
   return (
-    <section className="gutter bg-stone-100 py-36">
+    <section className="gutter bg-stone-100 py-36 max-[640px]:py-20">
       <div className="content grid grid-cols-[5fr_7fr] items-start gap-24 max-[900px]:grid-cols-1 max-[900px]:gap-16">
         <Reveal>
           <SectionHeading
@@ -40,7 +40,7 @@ export function Lineage() {
               {FACTS.map(([fact, label]) => (
                 <div
                   key={fact}
-                  className="grid grid-cols-[150px_1fr] items-baseline gap-5 border-b border-[var(--hairline-navy)] py-3.5"
+                  className="grid grid-cols-[150px_1fr] items-baseline gap-5 border-b border-[var(--hairline-navy)] py-3.5 max-[640px]:grid-cols-[110px_1fr]"
                 >
                   <span
                     className="text-navy-900"

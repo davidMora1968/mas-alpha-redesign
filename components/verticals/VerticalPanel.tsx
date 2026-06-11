@@ -49,7 +49,7 @@ export function VerticalPanel({
               >
                 {num}
               </span>
-              <span className="type-eyebrow whitespace-nowrap text-gold-400">{name}</span>
+              <span className="type-eyebrow whitespace-nowrap text-gold-400 max-[640px]:whitespace-normal">{name}</span>
             </div>
           </Reveal>
           <Reveal delay={150}>

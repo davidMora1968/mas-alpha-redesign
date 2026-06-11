@@ -49,7 +49,9 @@ export function PortfolioHero() {
       <div className="absolute inset-x-0 bottom-0">
         <div className="content gutter flex flex-col items-start gap-[30px] pb-24">
           <Reveal>
-            <Eyebrow>Flagship Portfolio · MAS Tierra</Eyebrow>
+            <Eyebrow className="max-[640px]:[&>span:last-child]:whitespace-normal">
+              Flagship Portfolio · MAS Tierra
+            </Eyebrow>
           </Reveal>
           <Reveal delay={150}>
             <h1 className="type-display-xl max-w-[10em] text-stone-50">
@@ -57,7 +59,7 @@ export function PortfolioHero() {
             </h1>
           </Reveal>
           <Reveal delay={300}>
-            <p className="type-eyebrow whitespace-nowrap text-navy-300">
+            <p className="type-eyebrow whitespace-nowrap text-navy-300 max-[640px]:whitespace-normal">
               Bighorn National Forest, Wyoming · 44.16° N, 107.21° W
             </p>
           </Reveal>

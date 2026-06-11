@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     title: 'Our Approach — Mas Alpha Securities',
     description:
       'An investment philosophy built on scarcity, patience, and discipline — written once, applied without exception.',
-    images: ['/assets/imagery/miami-shoreline.jpg'],
   },
 };
 

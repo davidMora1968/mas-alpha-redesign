@@ -14,7 +14,7 @@ const ROWS: [string, string][] = [
  */
 export function PortfolioUndisclosed() {
   return (
-    <section aria-label="Further holdings" className="gutter bg-navy-900 py-36">
+    <section aria-label="Further holdings" className="gutter bg-navy-900 py-36 max-[640px]:py-20">
       <div className="content grid grid-cols-[5fr_7fr] items-start gap-24 max-[900px]:grid-cols-1 max-[900px]:gap-16">
         <Reveal>
           <div>
@@ -32,7 +32,7 @@ export function PortfolioUndisclosed() {
             {ROWS.map(([k, v]) => (
               <div
                 key={k}
-                className="grid grid-cols-[1fr_auto] items-baseline gap-6 border-b border-[var(--hairline-gold-faint)] py-[26px]"
+                className="grid grid-cols-[1fr_auto] items-baseline gap-6 border-b border-[var(--hairline-gold-faint)] py-[26px] max-[640px]:grid-cols-1 max-[640px]:gap-1.5"
               >
                 <span
                   className="text-stone-50"
@@ -40,7 +40,7 @@ export function PortfolioUndisclosed() {
                 >
                   {k}
                 </span>
-                <span className="type-eyebrow whitespace-nowrap text-navy-300">{v}</span>
+                <span className="type-eyebrow whitespace-nowrap text-navy-300 max-[640px]:whitespace-normal">{v}</span>
               </div>
             ))}
           </div>
