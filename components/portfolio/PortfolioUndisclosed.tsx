@@ -5,6 +5,7 @@ const ROWS: [string, string][] = [
   ['Essential Infrastructure', 'Select & undisclosed'],
   ['Experiential Hospitality', 'MAS Tierra · further holdings undisclosed'],
   ['Media & Entertainment', 'Select & undisclosed'],
+  ['Public Portfolio', 'Undisclosed by design'],
 ];
 
 /**
