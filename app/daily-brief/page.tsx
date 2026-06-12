@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BriefDate } from '@/components/daily-brief/BriefDate';
 import { Button } from '@/components/ui/Button';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
@@ -75,7 +74,7 @@ export default function DailyBriefPage() {
       <section className="gutter bg-navy-950 pb-24 pt-44 max-[640px]:pb-16 max-[640px]:pt-36">
         <div className="content flex flex-col items-start gap-8">
           <Reveal>
-            <BriefDate />
+            <span className="type-eyebrow text-gold-400">Edition No. 1 · July 15, 2026</span>
           </Reveal>
           <Reveal delay={150}>
             <h1 className="type-display-xl max-w-[9em] text-balance text-stone-50">
