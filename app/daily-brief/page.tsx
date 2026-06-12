@@ -200,8 +200,8 @@ export default function DailyBriefPage() {
           </Reveal>
           <Reveal delay={400}>
             <p className="type-body-sm max-w-[36em] text-ink-600">
-              The leadership gallery stands ready with engraved monograms — portraits are
-              awaited. A fine reason to schedule the photographer.
+              The gallery is complete — every steward photographed, set against the
+              firm{'’'}s own surroundings.
             </p>
           </Reveal>
         </div>

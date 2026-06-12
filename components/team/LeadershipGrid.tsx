@@ -28,15 +28,30 @@ export function LeadershipGrid() {
         </Reveal>
         <Reveal delay={150}>
           <div className="mt-24 grid grid-cols-4 gap-10 max-[1100px]:grid-cols-2 max-[640px]:grid-cols-1 max-[640px]:mt-16">
-            <LeaderCard name="Isabella Katz" title="Chief Marketing Officer" onDark={false} />
+            <LeaderCard
+              name="Isabella Katz"
+              title="Chief Marketing Officer"
+              src="/assets/team/isabella-katz.jpg"
+              onDark={false}
+            />
             <LeaderCard
               name="Moises Jattin"
               title="Head of Partner Relations"
               src="/assets/team/moises-jattin.jpg"
               onDark={false}
             />
-            <LeaderCard name="Gabriel Freire" title="Chief Financial Officer" onDark={false} />
-            <LeaderCard name="Mary deVenoge" title="Director, The MAS Partners Club" onDark={false} />
+            <LeaderCard
+              name="Gabriel Freire"
+              title="Chief Financial Officer"
+              src="/assets/team/gabriel-freire.jpg"
+              onDark={false}
+            />
+            <LeaderCard
+              name="Mary deVenoge"
+              title="Director, The MAS Partners Club"
+              src="/assets/team/mary-devenoge.jpg"
+              onDark={false}
+            />
           </div>
         </Reveal>
       </div>
