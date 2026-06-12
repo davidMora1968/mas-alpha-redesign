@@ -9,6 +9,7 @@ export function LeaderCard({
   name,
   title,
   src,
+  objectPosition = 'center',
   note,
   onDark = true,
   className = '',
@@ -17,6 +18,8 @@ export function LeaderCard({
   name: string;
   title: string;
   src?: string;
+  /** Crop anchor for tall portraits — e.g. 'center top' keeps heads in frame. */
+  objectPosition?: string;
   note?: string;
   onDark?: boolean;
   className?: string;
@@ -42,6 +45,7 @@ export function LeaderCard({
             fill
             sizes="(max-width: 900px) 100vw, 20vw"
             className="object-cover [filter:grayscale(0.2)]"
+            style={{ objectPosition }}
           />
         ) : (
           <span

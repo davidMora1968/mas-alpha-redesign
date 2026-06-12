@@ -17,6 +17,7 @@ export function LeadershipGrid() {
               name="Jose Mas Jr."
               title="Founder, CEO & CIO"
               src="/assets/team/jose-mas.jpg"
+              objectPosition="center top"
               note="Second generation of the MasTec infrastructure family."
               onDark={false}
             />
@@ -38,12 +39,14 @@ export function LeadershipGrid() {
               name="Moises Jattin"
               title="Head of Partner Relations"
               src="/assets/team/moises-jattin.jpg"
+              objectPosition="center top"
               onDark={false}
             />
             <LeaderCard
               name="Gabriel Freire"
               title="Chief Financial Officer"
               src="/assets/team/gabriel-freire.jpg"
+              objectPosition="center top"
               onDark={false}
             />
             <LeaderCard
