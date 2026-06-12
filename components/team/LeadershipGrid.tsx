@@ -4,8 +4,8 @@ import { LeaderCard } from '@/components/site/LeaderCard';
 /**
  * Leadership grid — founder featured beside the founding-conviction
  * statement (firm voice, not a personal quote), then a four-up row.
- * Portraits are intentionally the quiet serif monogram placeholder
- * (no `src`), per the design. Mirrors TeamGrid in the prototype.
+ * Portraits arrive as the firm supplies them (assets/team/); leaders
+ * without one keep the quiet serif monogram placeholder.
  */
 export function LeadershipGrid() {
   return (
@@ -16,6 +16,7 @@ export function LeadershipGrid() {
             <LeaderCard
               name="Jose Mas Jr."
               title="Founder, CEO & CIO"
+              src="/assets/team/jose-mas.jpg"
               note="Second generation of the MasTec infrastructure family."
               onDark={false}
             />
@@ -28,7 +29,12 @@ export function LeadershipGrid() {
         <Reveal delay={150}>
           <div className="mt-24 grid grid-cols-4 gap-10 max-[1100px]:grid-cols-2 max-[640px]:grid-cols-1 max-[640px]:mt-16">
             <LeaderCard name="Isabella Katz" title="Chief Marketing Officer" onDark={false} />
-            <LeaderCard name="Moises Jattin" title="Head of Partner Relations" onDark={false} />
+            <LeaderCard
+              name="Moises Jattin"
+              title="Head of Partner Relations"
+              src="/assets/team/moises-jattin.jpg"
+              onDark={false}
+            />
             <LeaderCard name="Gabriel Freire" title="Chief Financial Officer" onDark={false} />
             <LeaderCard name="Mary deVenoge" title="Director, The MAS Partners Club" onDark={false} />
           </div>
