@@ -27,12 +27,12 @@ export function Hero() {
 
   const bgImage = (
     <Image
-      src="/assets/imagery/miami-shoreline.jpg"
-      alt="Black-and-white aerial view of the Miami shoreline"
+      src="/assets/imagery/miami-skyline-night.jpg"
+      alt="The Miami skyline at night, reflected on the water"
       fill
       priority
       className="object-cover"
-      style={{ objectPosition: 'center 28%' }}
+      style={{ objectPosition: 'center 42%' }}
       sizes="100vw"
       onLoad={() => setReady(true)}
       onError={() => setReady(true)} // never leave the hero dark
