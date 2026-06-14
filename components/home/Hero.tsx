@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   motion,
   useReducedMotion,
@@ -11,35 +11,22 @@ import {
 import { Reveal, EASE_REVEAL } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 
-const POSTER = '/assets/imagery/miami-skyline-poster.jpg';
-
 /**
- * Homepage hero. Full-viewport navy stage: a slow, looping Miami-skyline
- * video with a poster for instant paint, parallax drift, scrim + top fade
+ * Homepage hero. Full-viewport navy stage: a sharp Miami-skyline photo at
+ * dusk with a slow fade/settle on load, parallax drift, scrim + top fade
  * for legibility, bottom-anchored content, and a vertical scroll cue.
- * Honors prefers-reduced-motion (shows the poster still, no playback).
  */
 export function Hero() {
   const reduced = useReducedMotion();
   const [ready, setReady] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Gentle parallax: background drifts down at 18% of scroll.
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, (v) => v * 0.18);
 
-  // Nudge autoplay (some browsers need an explicit muted play() call).
-  useEffect(() => {
-    if (reduced) return;
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = true;
-    v.play().catch(() => {}); // autoplay may be blocked; poster remains
-  }, [reduced]);
-
-  const bgPoster = (
+  const bgImage = (
     <Image
-      src={POSTER}
+      src="/assets/imagery/miami-skyline-dusk.jpg"
       alt="The Miami skyline at dusk, reflected on the water"
       fill
       priority
@@ -47,25 +34,8 @@ export function Hero() {
       style={{ objectPosition: 'center 50%' }}
       sizes="100vw"
       onLoad={() => setReady(true)}
-    />
-  );
-
-  const bgVideo = (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 h-full w-full object-cover"
-      style={{ objectPosition: 'center 50%' }}
-      poster={POSTER}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      onCanPlay={() => setReady(true)}
       onError={() => setReady(true)} // never leave the hero dark
-    >
-      <source src="/assets/imagery/miami-skyline.mp4" type="video/mp4" />
-    </video>
+    />
   );
 
   return (
@@ -73,7 +43,7 @@ export function Hero() {
       {/* Parallax wrapper — oversized vertically so the drift never exposes edges */}
       {reduced ? (
         <div className="absolute" style={{ inset: '-12% 0' }}>
-          <div className="absolute inset-0">{bgPoster}</div>
+          <div className="absolute inset-0">{bgImage}</div>
         </div>
       ) : (
         <motion.div className="absolute" style={{ inset: '-12% 0', y }}>
@@ -86,7 +56,7 @@ export function Hero() {
               scale: { duration: 5.2, ease: EASE_REVEAL },
             }}
           >
-            {bgVideo}
+            {bgImage}
           </motion.div>
         </motion.div>
       )}
