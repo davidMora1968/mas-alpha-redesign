@@ -26,7 +26,7 @@ export function Hero() {
 
   const bgImage = (
     <Image
-      src="/assets/imagery/miami-skyline-dusk.jpg"
+      src="/assets/imagery/miami-skyline-hero.jpg"
       alt="The Miami skyline at dusk, reflected on the water"
       fill
       priority
