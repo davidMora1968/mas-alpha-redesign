@@ -30,7 +30,7 @@ export function PortfolioStory() {
                     key={k}
                     className="grid grid-cols-[110px_1fr] gap-5 border-b border-[var(--hairline-navy)] py-4"
                   >
-                    <span className="type-eyebrow text-gold-500">{k}</span>
+                    <span className="type-eyebrow text-gold-600">{k}</span>
                     <span className="type-body-sm text-ink-600">{v}</span>
                   </div>
                 ))}

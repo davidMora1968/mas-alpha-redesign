@@ -3,7 +3,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export default function NotFound() {
   return (
-    <main className="gutter flex min-h-screen flex-col items-center justify-center gap-10 bg-navy-950 text-center">
+    <main id="main" tabIndex={-1} className="gutter flex min-h-screen flex-col items-center justify-center gap-10 bg-navy-950 text-center">
       <Eyebrow rule={false}>Page not found</Eyebrow>
       <h1 className="type-display-lg max-w-[14em] text-balance text-stone-50">
         There is nothing at this address.

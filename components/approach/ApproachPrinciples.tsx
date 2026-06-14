@@ -24,7 +24,7 @@ export function ApproachPrinciples() {
                 {p.numeral}
               </div>
               <div>
-                <div className="type-eyebrow text-gold-500">{p.title}</div>
+                <div className="type-eyebrow text-gold-600">{p.title}</div>
                 <h2 className="type-display-md mt-5 max-w-[11em] text-balance text-navy-900">
                   {p.statement}
                 </h2>

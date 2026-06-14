@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function PartnersClubPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <ClubHero />
       <ClubExperience />
       <ClubCalendar />

@@ -16,7 +16,7 @@ export function Eyebrow({
 }) {
   return (
     <div
-      className={`type-eyebrow flex items-center gap-4 ${onDark ? 'text-gold-400' : 'text-gold-500'} ${className}`}
+      className={`type-eyebrow flex items-center gap-4 ${onDark ? 'text-gold-400' : 'text-gold-600'} ${className}`}
     >
       {rule && (
         <span

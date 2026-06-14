@@ -69,10 +69,19 @@ async function getPress(): Promise<{ items: PressItem[]; errored: boolean }> {
   const items: PressItem[] = [];
   let failures = 0;
   for (const q of queries) {
+    // Bound both the fetch AND the body read — an unauthenticated upstream that
+    // accepts the connection then stalls must not consume the 60s function budget
+    // and silently drop the whole send. An abort degrades to "Press unavailable".
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), 8000);
     try {
       const res = await fetch(
         `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`,
-        { headers: { 'user-agent': 'Mozilla/5.0 (MasAlphaBrief/1.0)' }, cache: 'no-store' },
+        {
+          headers: { 'user-agent': 'Mozilla/5.0 (MasAlphaBrief/1.0)' },
+          cache: 'no-store',
+          signal: ac.signal,
+        },
       );
       if (!res.ok) {
         failures += 1;
@@ -98,6 +107,8 @@ async function getPress(): Promise<{ items: PressItem[]; errored: boolean }> {
     } catch (err) {
       failures += 1;
       console.error('[brief] press fetch failed for', q, err);
+    } finally {
+      clearTimeout(timer);
     }
   }
   return {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <Hero />
       <Philosophy />
       <CredibilityBand />

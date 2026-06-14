@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function InviteNewPage() {
   return (
-    <main className="gutter flex min-h-screen flex-col items-center justify-center bg-navy-950 py-40">
+    <main id="main" tabIndex={-1} className="gutter flex min-h-screen flex-col items-center justify-center bg-navy-950 py-40">
       <div className="flex w-full max-w-[520px] flex-col gap-9">
         <Reveal>
           <Eyebrow>Partner Relations</Eyebrow>

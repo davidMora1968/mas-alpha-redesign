@@ -38,7 +38,7 @@ const personJsonLd = LEADERS.map((leader) => ({
 
 export default function TeamPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

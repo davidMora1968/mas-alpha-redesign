@@ -37,7 +37,7 @@ export default async function InvitePage({
   const host = clean(params.from) ?? 'Moises Jattin · Head of Partner Relations';
 
   return (
-    <main className="gutter flex min-h-screen flex-col items-center justify-center bg-navy-950 py-40 text-center">
+    <main id="main" tabIndex={-1} className="gutter flex min-h-screen flex-col items-center justify-center bg-navy-950 py-40 text-center">
       <div className="flex w-full max-w-[560px] flex-col items-center gap-9">
         <Reveal>
           <span className="inline-flex rounded-full p-3 shadow-[0_0_0_1px_var(--hairline-gold-faint)]">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,6 +27,7 @@ export function NavBar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const reduced = useReducedMotion();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -48,18 +49,41 @@ export function NavBar() {
     setOpen(false);
   }, [pathname]);
 
-  // While open: Escape closes, body scroll locks.
+  // While open: trap focus inside the dialog (background goes inert), lock body
+  // scroll, Escape closes, and focus returns to the trigger on close.
   useEffect(() => {
     if (!open) return;
+
+    // Remember what opened the menu so we can restore focus on close.
+    const trigger = document.activeElement as HTMLElement | null;
+
+    // Take everything behind the overlay out of the tab order + a11y tree.
+    const backdrop = Array.from(
+      document.querySelectorAll('nav[aria-label="Primary"], main, footer'),
+    ) as HTMLElement[];
+    backdrop.forEach((el) => {
+      el.setAttribute('inert', '');
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    // Move focus into the dialog so keyboard/SR users start inside it.
+    closeButtonRef.current?.focus();
+
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setOpen(false);
     };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
+      backdrop.forEach((el) => {
+        el.removeAttribute('inert');
+        el.removeAttribute('aria-hidden');
+      });
+      trigger?.focus();
     };
   }, [open]);
 
@@ -116,7 +140,7 @@ export function NavBar() {
           aria-haspopup="dialog"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          className="type-nav ml-auto hidden cursor-pointer border-0 bg-transparent p-0 uppercase text-navy-100 transition-colors duration-[350ms] ease-reveal hover:text-gold-300 max-[900px]:block"
+          className="type-nav ml-auto hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center border-0 bg-transparent uppercase text-navy-100 transition-colors duration-[350ms] ease-reveal hover:text-gold-300 max-[900px]:inline-flex"
         >
           Menu
         </button>
@@ -154,9 +178,10 @@ export function NavBar() {
                 />
               </Link>
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={() => setOpen(false)}
-                className="type-nav cursor-pointer border-0 bg-transparent p-0 uppercase text-stone-50 transition-colors duration-[350ms] ease-reveal hover:text-gold-300"
+                className="type-nav -m-2 inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center border-0 bg-transparent p-2 uppercase text-stone-50 transition-colors duration-[350ms] ease-reveal hover:text-gold-300"
               >
                 Close
               </button>

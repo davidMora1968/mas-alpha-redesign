@@ -30,7 +30,7 @@ export function PullQuote({
         </blockquote>
         {attribution && (
           <figcaption
-            className={`type-eyebrow mt-5 ${onDark ? 'text-gold-400' : 'text-gold-500'}`}
+            className={`type-eyebrow mt-5 ${onDark ? 'text-gold-400' : 'text-gold-600'}`}
           >
             {attribution}
           </figcaption>

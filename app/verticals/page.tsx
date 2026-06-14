@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function VerticalsPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <VerticalsHero />
       <VerticalPanel
         id="essential-infrastructure"
@@ -46,7 +46,7 @@ export default function VerticalsPage() {
             style={{ objectPosition: 'center 38%' }}
           />
         }
-        link="The flagship: Meadowlark Ski & Lake Lodge →"
+        link="The flagship: Meadowlark →"
         linkHref="/portfolio"
       />
       <VerticalPanel

@@ -76,7 +76,7 @@ export function PartnerCta() {
 
   return (
     <div className="flex w-full flex-col items-center gap-9">
-      <div className="flex gap-5">
+      <div className="flex flex-wrap justify-center gap-5">
         <Button
           variant="solid"
           size="lg"

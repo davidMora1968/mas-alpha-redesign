@@ -69,7 +69,7 @@ function SectionEyebrow({ num, children }: { num: string; children: string }) {
 
 export default function DailyBriefPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       {/* Masthead */}
       <section className="gutter bg-navy-950 pb-24 pt-44 max-[640px]:pb-16 max-[640px]:pt-36">
         <div className="content flex flex-col items-start gap-8">

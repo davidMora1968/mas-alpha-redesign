@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <PortfolioHero />
       <PortfolioStory />
       <PortfolioHoldings />

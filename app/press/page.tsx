@@ -67,7 +67,7 @@ function PressFeatured() {
         <Reveal>
           <div className="grid grid-cols-[4fr_8fr] items-start gap-16 border-t border-[var(--hairline-gold)] pt-10 max-[900px]:grid-cols-1 max-[900px]:gap-10">
             <div className="flex flex-col gap-[14px]">
-              <span className="type-eyebrow text-gold-500">Featured</span>
+              <span className="type-eyebrow text-gold-600">Featured</span>
               <span className="text-navy-900 [font:300_22px/1.3_var(--font-serif-display)]">
                 {FEATURED.outlet}
               </span>
@@ -87,7 +87,7 @@ function PressFeatured() {
                   href={FEATURED.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="type-button inline-flex items-center justify-center gap-2.5 cursor-pointer whitespace-nowrap no-underline rounded-none transition-[background-color,color,border-color] duration-[350ms] ease-reveal text-navy-900 px-0.5 py-1 bg-transparent border-b border-[var(--hairline-gold)] hover:text-gold-400"
+                  className="type-button inline-flex items-center justify-center gap-2.5 cursor-pointer whitespace-nowrap no-underline rounded-none transition-[background-color,color,border-color] duration-[350ms] ease-reveal text-navy-900 px-0.5 py-1 bg-transparent border-b border-[var(--hairline-gold)] hover:text-gold-600"
                 >
                   {FEATURED.linkLabel}
                 </a>
@@ -115,8 +115,8 @@ function PressLedger() {
                 rel="noopener noreferrer"
                 className="group grid grid-cols-[4fr_7fr_1fr] items-baseline gap-10 border-t border-[var(--hairline-navy)] py-[34px] no-underline max-[900px]:grid-cols-1 max-[900px]:gap-3"
               >
-                <span className="type-eyebrow text-gold-500">{story.outlet}</span>
-                <span className="text-navy-900 transition-colors duration-[240ms] ease-reveal group-hover:text-gold-500 [font:300_clamp(20px,1.8vw,26px)/1.35_var(--font-serif-display)]">
+                <span className="type-eyebrow text-gold-600">{story.outlet}</span>
+                <span className="text-navy-900 underline-offset-[6px] transition-colors duration-[240ms] ease-reveal group-hover:text-gold-600 group-hover:underline group-focus-visible:underline [font:300_clamp(20px,1.8vw,26px)/1.35_var(--font-serif-display)]">
                   {story.headline}
                 </span>
                 <span className="type-caption whitespace-nowrap text-right uppercase tracking-[0.08em] text-ink-600 max-[900px]:text-left">
@@ -161,7 +161,7 @@ function PressFeaturedIn() {
 
 export default function PressPage() {
   return (
-    <main>
+    <main id="main" tabIndex={-1} className="scroll-mt-[92px]">
       <PressHeader />
       <PressFeatured />
       <PressLedger />

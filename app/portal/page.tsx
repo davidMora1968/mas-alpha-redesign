@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function PortalPage() {
   return (
-    <main className="gutter flex min-h-svh items-center justify-center bg-navy-950 py-36">
+    <main id="main" tabIndex={-1} className="gutter flex min-h-svh items-center justify-center bg-navy-950 py-36">
       <div className="flex w-full max-w-[400px] flex-col items-center text-center">
         <Reveal>
           <Image

@@ -46,6 +46,10 @@ export const metadata: Metadata = {
   },
 };
 
+// Same base used for metadataBase — JSON-LD URL properties must be absolute,
+// crawlable URLs (relative paths can be dropped from rich results).
+const SITE_BASE = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000').replace(/\/$/, '');
+
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -53,6 +57,7 @@ const organizationJsonLd = {
   description:
     'A private investment firm acquiring premier, irreplaceable real assets across the United States — essential infrastructure, experiential hospitality, and media & entertainment — held for the long term.',
   foundingDate: '2023',
+  url: SITE_BASE,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Coral Gables',
@@ -60,13 +65,21 @@ const organizationJsonLd = {
     addressCountry: 'US',
   },
   email: 'ir@masalphasecurities.com',
-  logo: '/assets/logos/mas-icon.png',
+  logo: `${SITE_BASE}/assets/logos/mas-icon.png`,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spectral.variable} ${hanken.variable}`}>
       <body>
+        {/* Keyboard/switch users bypass the fixed nav. No sr-only utility exists
+            here, so the link ships its own focus-reveal (off-screen until focused). */}
+        <a
+          href="#main"
+          className="type-nav absolute left-4 top-[-200px] z-[100] border border-gold-400 bg-navy-950 px-5 py-3 uppercase text-stone-50 no-underline transition-[top] duration-200 focus:top-4 focus-visible:top-4"
+        >
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
