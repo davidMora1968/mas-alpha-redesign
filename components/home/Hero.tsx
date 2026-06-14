@@ -26,8 +26,8 @@ export function Hero() {
 
   const bgImage = (
     <Image
-      src="/assets/imagery/miami-skyline-hero.jpg"
-      alt="The Miami skyline at dusk, reflected on the water"
+      src="/assets/imagery/brickell-skyline-hero.jpg"
+      alt="The Brickell skyline in Miami at dusk, above Biscayne Bay"
       fill
       priority
       className="object-cover"
@@ -100,15 +100,15 @@ export function Hero() {
         <Reveal delay={150}>
           <h1
             className="type-display-xl max-w-[11em] text-stone-50"
-            style={{ textShadow: '0 2px 30px rgba(6, 15, 29, 0.72)' }}
+            style={{ textShadow: '0 2px 30px rgba(6, 15, 29, 0.72), 0 1px 10px rgba(6, 15, 29, 0.55)' }}
           >
-            We own what cannot be{'\u00A0'}replaced.
+            Where preparation meets opportunity.
           </h1>
         </Reveal>
         <Reveal delay={300}>
           <p
             className="type-lede max-w-[32em] text-navy-100"
-            style={{ textShadow: '0 1px 18px rgba(6, 15, 29, 0.6)' }}
+            style={{ textShadow: '0 1px 18px rgba(6, 15, 29, 0.6), 0 1px 6px rgba(6, 15, 29, 0.55)' }}
           >
             Mas Alpha Securities deploys private capital to acquire premier infrastructure assets
             across the United States.
