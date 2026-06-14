@@ -61,12 +61,26 @@ export function Hero() {
         </motion.div>
       )}
 
-      {/* Image protection */}
+      {/* Image protection — base scrim, top fade, and a stronger bottom-left
+          wash so the headline stays legible over bright skyline reflections. */}
       <div aria-hidden="true" className="absolute inset-0" style={{ background: 'var(--scrim-hero)' }} />
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-[140px]"
         style={{ background: 'linear-gradient(180deg, rgba(6, 15, 29, 0.55), transparent)' }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(0deg, rgba(6,15,29,0.86) 0%, rgba(6,15,29,0.55) 26%, rgba(6,15,29,0.12) 52%, transparent 70%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(90deg, rgba(6,15,29,0.55) 0%, rgba(6,15,29,0.16) 38%, transparent 62%)' }}
       />
 
       {/* Content — anchored to the bottom edge */}
@@ -84,12 +98,18 @@ export function Hero() {
           </span>
         </Reveal>
         <Reveal delay={150}>
-          <h1 className="type-display-xl max-w-[11em] text-stone-50">
+          <h1
+            className="type-display-xl max-w-[11em] text-stone-50"
+            style={{ textShadow: '0 2px 30px rgba(6, 15, 29, 0.72)' }}
+          >
             We own what cannot be{'\u00A0'}replaced.
           </h1>
         </Reveal>
         <Reveal delay={300}>
-          <p className="type-lede max-w-[32em] text-navy-100">
+          <p
+            className="type-lede max-w-[32em] text-navy-100"
+            style={{ textShadow: '0 1px 18px rgba(6, 15, 29, 0.6)' }}
+          >
             Mas Alpha Securities deploys private capital to acquire premier infrastructure assets
             across the United States.
           </p>
