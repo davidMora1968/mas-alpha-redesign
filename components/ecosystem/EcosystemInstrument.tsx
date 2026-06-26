@@ -44,9 +44,9 @@ const MOVEMENTS: Movement[] = [
     title: 'It saves every inquiry the second it comes in.',
     sub: 'When someone asks to become a partner, their note is saved right away and sent straight to your desk. Nothing slips through, and nothing is ever made public.',
     mono: 'saved · sent to the desk',
-    image: '/assets/imagery/meadowlark-horses.avif',
-    alt: 'Open country at the firm’s Meadowlark holding',
-    pos: 'center 50%',
+    image: '/assets/imagery/meadowlark-rider.jpg',
+    alt: 'A rider above the valley at the firm’s Meadowlark holding',
+    pos: 'center 42%',
     live: true,
   },
   {
