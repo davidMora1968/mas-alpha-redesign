@@ -9,8 +9,8 @@ import { Reveal, EASE_REVEAL } from '@/components/ui/Reveal';
 /* ------------------------------------------------------------------ *
  *  THE ECOSYSTEM — /ecosystem
  *  A plain-spoken, cinematic walk through what the website actually does
- *  for the firm: six things, over the firm's own imagery, one of them
- *  writing itself live. Internal showcase (unlinked, noindexed).
+ *  for the firm: six things, mostly over the firm's own imagery, with a live
+ *  ledger and a funnel dashboard. Internal showcase (unlinked, noindexed).
  * ------------------------------------------------------------------ */
 
 const GOLD = '#C2A36B';
@@ -25,6 +25,7 @@ type Movement = {
   alt: string;
   pos: string;
   live?: boolean;
+  dashboard?: boolean;
 };
 
 const MOVEMENTS: Movement[] = [
@@ -81,13 +82,14 @@ const MOVEMENTS: Movement[] = [
   },
   {
     num: 'VI',
-    verb: 'Opens',
-    title: 'It opens the door for partners.',
-    sub: 'The investor portal stays closed to everyone else and opens only by name. It is the one door the system keeps for the people already inside.',
-    mono: 'opened only by name',
-    image: '/assets/imagery/club-humidor.jpg',
-    alt: 'An interior of the MAS Partners Club',
-    pos: 'center 50%',
+    verb: 'Funnels',
+    title: 'Everything funnels into one view.',
+    sub: 'Every inquiry, every mention in the press, every invitation, and the customer data behind them funnels end to end into one place, ready to surface in a single dashboard, built around exactly what your desk needs to see.',
+    mono: 'data · end to end',
+    image: '',
+    alt: '',
+    pos: 'center',
+    dashboard: true,
   },
 ];
 
@@ -234,6 +236,167 @@ function Panel({ m, reduced }: { m: Movement; reduced: boolean | null }) {
   );
 }
 
+/* ------------------- the funnel dashboard (VI) --------------------- */
+const FUNNEL = [
+  { label: 'Inquiries', w: '100%' },
+  { label: 'In conversation', w: '62%' },
+  { label: 'Invited', w: '38%' },
+  { label: 'Partners', w: '22%' },
+];
+
+const FEED_ITEMS = [
+  'inquiry · sealed',
+  'press · gathered',
+  'invitation · sent',
+  'brief · queued · mon 06:00',
+  'inquiry · sealed',
+  'mention · flagged',
+];
+function feedStamp(i: number) {
+  const m = 6 * 60 + 2 + i * 23; // from 06:02, ~23-min gaps; pure arithmetic
+  return `${pad(Math.floor(m / 60) % 24)}:${pad(m % 60)} · ${FEED_ITEMS[i % FEED_ITEMS.length]}`;
+}
+
+function DashboardFeed({ reduced }: { reduced: boolean | null }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.4 });
+  const [rows, setRows] = useState<{ id: number; text: string }[]>(() =>
+    [0, 1, 2, 3].map((i) => ({ id: i, text: feedStamp(i) })),
+  );
+  useEffect(() => {
+    if (reduced || !inView) return;
+    let i = 4;
+    const id = setInterval(() => {
+      setRows((prev) => [...prev, { id: i, text: feedStamp(i) }].slice(-5));
+      i += 1;
+    }, 2400);
+    return () => clearInterval(id);
+  }, [reduced, inView]);
+  return (
+    <div ref={ref}>
+      <div className="mb-3 flex items-center gap-2">
+        <Heartbeat size={5} reduced={reduced} />
+        <span className="type-mono-detail text-navy-300">the live feed</span>
+      </div>
+      <ul className="flex flex-col">
+        {rows.map((r) =>
+          reduced ? (
+            <li key={r.id} className="type-mono-detail border-b border-[var(--hairline-on-dark)] py-2 text-navy-100">
+              {r.text}
+            </li>
+          ) : (
+            <motion.li
+              key={r.id}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EASE_REVEAL }}
+              className="type-mono-detail border-b border-[var(--hairline-on-dark)] py-2 text-navy-100"
+            >
+              {r.text}
+            </motion.li>
+          ),
+        )}
+      </ul>
+    </div>
+  );
+}
+
+function DashboardMock({ reduced }: { reduced: boolean | null }) {
+  const clock = useEstClock(reduced);
+  return (
+    <div className="relative w-full border border-[var(--hairline-gold)] bg-[rgba(6,15,29,0.72)] p-6 backdrop-blur-sm md:p-8">
+      {/* header */}
+      <div className="flex items-start justify-between gap-4 border-b border-[var(--hairline-gold-faint)] pb-4">
+        <div>
+          <div className="type-eyebrow text-stone-50">The Partner Desk</div>
+          <div className="type-mono-detail mt-1.5 text-navy-300">one view · end to end</div>
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <Heartbeat size={6} reduced={reduced} />
+          <span className="type-mono-detail text-gold-400" suppressHydrationWarning>
+            live · {clock} est
+          </span>
+        </div>
+      </div>
+      {/* funnel + feed */}
+      <div className="mt-6 grid gap-7 min-[560px]:grid-cols-2">
+        <div>
+          <div className="type-mono-detail mb-3 text-navy-300">the funnel</div>
+          <div className="flex flex-col gap-3.5">
+            {FUNNEL.map((s, i) => (
+              <div key={s.label}>
+                <div className="type-caption mb-1.5 text-navy-100">{s.label}</div>
+                <div className="h-[7px] w-full bg-[rgba(194,163,107,0.12)]">
+                  {reduced ? (
+                    <div className="h-full" style={{ width: s.w, background: GOLD, opacity: 1 - i * 0.18 }} />
+                  ) : (
+                    <motion.div
+                      className="h-full"
+                      style={{ background: GOLD, opacity: 1 - i * 0.18 }}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: s.w }}
+                      viewport={{ once: true, amount: 0.6 }}
+                      transition={{ duration: 0.9, ease: EASE_REVEAL, delay: 0.2 + i * 0.12 }}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <DashboardFeed reduced={reduced} />
+      </div>
+      {/* what funnels in */}
+      <div className="mt-7 border-t border-[var(--hairline-gold-faint)] pt-5">
+        <div className="type-mono-detail mb-3 text-navy-300">what funnels in</div>
+        <div className="flex flex-wrap gap-2">
+          {['Inquiries', 'Press', 'The Brief', 'Invitations', 'Portal'].map((s) => (
+            <span
+              key={s}
+              className="type-mono-detail border border-[var(--hairline-gold-faint)] px-3 py-1.5 text-navy-100"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DashboardPanel({ m, reduced }: { m: Movement; reduced: boolean | null }) {
+  return (
+    <section aria-label={m.verb} className="relative flex min-h-[88vh] items-center overflow-hidden bg-navy-950">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(55% 50% at 78% 42%, rgba(194,163,107,0.10), transparent 70%)' }}
+      />
+      <div className="content gutter relative grid w-full items-center gap-12 py-24 md:grid-cols-[5fr_7fr] md:gap-16">
+        <div className="flex flex-col items-start gap-6">
+          <Reveal>
+            <div className="type-eyebrow text-gold-400">
+              {m.num} · {m.verb}
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="type-display-lg max-w-[12em] text-balance text-stone-50">{m.title}</h2>
+          </Reveal>
+          <Reveal delay={240}>
+            <p className="type-lede max-w-[32em] text-navy-100">{m.sub}</p>
+          </Reveal>
+          <Reveal delay={360}>
+            <span className="type-mono-detail text-gold-300">{m.mono}</span>
+          </Reveal>
+        </div>
+        <Reveal delay={200}>
+          <DashboardMock reduced={reduced} />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 /* --------------------------------- page ----------------------------- */
 export function EcosystemInstrument() {
   const reduced = useReducedMotion();
@@ -315,9 +478,13 @@ export function EcosystemInstrument() {
       </section>
 
       {/* ========================= MOVEMENTS ======================== */}
-      {MOVEMENTS.map((m) => (
-        <Panel key={m.num} m={m} reduced={reduced} />
-      ))}
+      {MOVEMENTS.map((m) =>
+        m.dashboard ? (
+          <DashboardPanel key={m.num} m={m} reduced={reduced} />
+        ) : (
+          <Panel key={m.num} m={m} reduced={reduced} />
+        ),
+      )}
 
       {/* ========================== CLOSING ========================= */}
       <section className="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-navy-950">
