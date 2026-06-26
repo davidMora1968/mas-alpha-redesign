@@ -140,10 +140,21 @@
   .type-eyebrow   { font: var(--type-eyebrow); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; }
   .type-button    { font: var(--type-button); letter-spacing: var(--tracking-button); text-transform: uppercase; }
   .type-nav       { font: var(--type-nav); letter-spacing: var(--tracking-nav); }
+  /* Monospace "logged" detail — clocks, timestamps, routing notes (the instrument) */
+  .type-mono-detail { font: 500 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.03em; }
 
   /* Page gutter + content width shorthands */
   .gutter { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
   .content { max-width: var(--content-max); margin-left: auto; margin-right: auto; }
+
+  /* Quiet underline-draw on the /ecosystem closing link */
+  .ma-portal-link { position: relative; padding-bottom: 5px; }
+  .ma-portal-link::after {
+    content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
+    background: var(--color-gold-400); transform: scaleX(0); transform-origin: left;
+    transition: transform 350ms var(--ease-reveal);
+  }
+  .ma-portal-link:hover::after, .ma-portal-link:focus-visible::after { transform: scaleX(1); }
 }
 
 /* ---------- Keyframes ---------- */
