@@ -110,8 +110,8 @@ export function Hero() {
             className="type-lede max-w-[32em] text-navy-100"
             style={{ textShadow: '0 1px 18px rgba(6, 15, 29, 0.6), 0 1px 6px rgba(6, 15, 29, 0.55)' }}
           >
-            Mas Alpha Securities invests across public and private markets, in irreplaceable assets
-            with substantial barriers to entry, held without a predefined horizon.
+            Mas Alpha Securities deploys private capital to acquire premier infrastructure assets
+            across the United States.
           </p>
         </Reveal>
         <Reveal delay={450}>
