@@ -12,11 +12,11 @@ import { Reveal, EASE_REVEAL } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 
 /**
- * Homepage hero. Full-viewport navy stage: the Miami skyline at dusk as a
- * muted autoplay video loop (~2.5MB, 1080p) with its first frame as an
- * instant poster, a slow fade/settle on load, parallax drift, scrims for
- * legibility, and bottom-anchored content. Under prefers-reduced-motion it
- * falls back to the still poster image.
+ * Homepage hero. Full-viewport navy stage: the Miami skyline at blue hour as
+ * a muted autoplay video loop (4K, ~20MB) with its first frame as an instant
+ * poster, a slow fade/settle on load, parallax drift, scrims for legibility,
+ * and bottom-anchored content. Under prefers-reduced-motion it falls back to
+ * the still poster image.
  */
 export function Hero() {
   const reduced = useReducedMotion();
@@ -38,12 +38,12 @@ export function Hero() {
     if (p) p.catch(() => {});
   }, [reduced]);
 
-  const POSTER = '/assets/imagery/hero-skyline-4k-poster.jpg';
+  const POSTER = '/assets/imagery/hero-miami-poster.jpg';
 
   const bg = reduced ? (
     <Image
       src={POSTER}
-      alt="The Miami skyline at dusk"
+      alt="The Miami skyline at blue hour"
       fill
       priority
       className="object-cover"
@@ -66,7 +66,7 @@ export function Hero() {
       onLoadedData={() => setReady(true)}
       onError={() => setReady(true)} // never leave the hero dark
     >
-      <source src="/assets/imagery/hero-skyline-4k.mp4" type="video/mp4" />
+      <source src="/assets/imagery/hero-miami.mp4" type="video/mp4" />
     </video>
   );
 
