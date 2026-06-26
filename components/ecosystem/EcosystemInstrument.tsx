@@ -8,9 +8,9 @@ import { Reveal, EASE_REVEAL } from '@/components/ui/Reveal';
 
 /* ------------------------------------------------------------------ *
  *  THE ECOSYSTEM — /ecosystem
- *  A cinematic walk through the firm's working system: six full-bleed
- *  movements over the firm's own imagery, one of them writing itself
- *  live. Internal showcase (unlinked, noindexed).
+ *  A plain-spoken, cinematic walk through what the website actually does
+ *  for the firm: six things, over the firm's own imagery, one of them
+ *  writing itself live. Internal showcase (unlinked, noindexed).
  * ------------------------------------------------------------------ */
 
 const GOLD = '#C2A36B';
@@ -31,9 +31,9 @@ const MOVEMENTS: Movement[] = [
   {
     num: 'I',
     verb: 'Greets',
-    title: 'It receives a partner before a word is exchanged.',
-    sub: 'Every arrival meets a digital home composed and certain of itself — the firm’s first impression, kept by the system, not left to chance.',
-    mono: 'visit → received',
+    title: 'It welcomes every new partner.',
+    sub: 'The moment someone arrives, the site greets them the way the firm would. A strong first impression, every time, handled for you.',
+    mono: 'every visit · welcomed',
     image: '/assets/imagery/brickell-skyline-hero.jpg',
     alt: 'The Brickell skyline at dusk',
     pos: 'center 45%',
@@ -41,20 +41,20 @@ const MOVEMENTS: Movement[] = [
   {
     num: 'II',
     verb: 'Records',
-    title: 'Every inquiry is committed the instant it is written.',
-    sub: 'A “Become a Partner” note lands in a sealed ledger the moment it is sent — nothing lost between the page and the desk, nothing made public.',
-    mono: 'inquiry → sealed → partner-relations desk',
-    image: '/assets/imagery/team-investor-night.jpg',
-    alt: 'The firm at work after hours',
+    title: 'It saves every inquiry the second it comes in.',
+    sub: 'When someone asks to become a partner, their note is saved right away and sent straight to your desk. Nothing slips through, and nothing is ever made public.',
+    mono: 'saved · sent to the desk',
+    image: '/assets/imagery/meadowlark-horses.avif',
+    alt: 'Open country at the firm’s Meadowlark holding',
     pos: 'center 50%',
     live: true,
   },
   {
     num: 'III',
     verb: 'Watches',
-    title: 'It reads how the firm is named in the press — without rest.',
-    sub: 'A continuous, patient watch over the firm’s coverage. What the world says is gathered and held before anyone on the desk has to go looking.',
-    mono: 'press → gathered → held',
+    title: 'It keeps an eye on the firm’s press.',
+    sub: 'It follows what is being written about Mas Alpha, so you are never the last to know. The coverage is gathered and waiting for you.',
+    mono: 'coverage · gathered',
     image: '/assets/imagery/miami-shoreline.jpg',
     alt: 'The Miami shoreline',
     pos: 'center 55%',
@@ -62,9 +62,9 @@ const MOVEMENTS: Movement[] = [
   {
     num: 'IV',
     verb: 'Reports',
-    title: 'Before the desk is staffed, the week is sealed and sent.',
-    sub: 'Composed overnight and delivered every Monday — inquiries, coverage, the week ahead — the firm briefing its own leadership while the office is still dark.',
-    mono: 'composed · sent — mon 06:00 est',
+    title: 'It sends leadership a brief every week.',
+    sub: 'Early every Monday, before anyone is at their desk, the site pulls together the week’s inquiries, press, and what is ahead, and emails it to the team.',
+    mono: 'sent every monday, 6am',
     image: '/assets/imagery/wyoming-range.avif',
     alt: 'First light over the Wyoming range',
     pos: 'center 50%',
@@ -72,9 +72,9 @@ const MOVEMENTS: Movement[] = [
   {
     num: 'V',
     verb: 'Invites',
-    title: 'Invitations drawn in the firm’s own hand.',
-    sub: 'A tool that issues a personal invitation for a named prospect — stationery cream, a gold hairline, the seal of MAS Alpha. Outreach that feels chosen, not marketed.',
-    mono: '— for the attention of —',
+    title: 'It writes invitations in the firm’s name.',
+    sub: 'Type a name and the site creates a personal invitation, set in the firm’s own stationery and ready to send. It feels chosen, never mass mailed.',
+    mono: 'ready to send, in your name',
     image: '/assets/imagery/club-night-pavilion.jpg',
     alt: 'The MAS Partners Club pavilion at night',
     pos: 'center 50%',
@@ -82,9 +82,9 @@ const MOVEMENTS: Movement[] = [
   {
     num: 'VI',
     verb: 'Opens',
-    title: 'One door, kept for those it has chosen.',
-    sub: 'The investor portal — closed to all others, opened only by name. The single threshold the system keeps for the partners already inside.',
-    mono: 'portal → opened by name',
+    title: 'It opens the door for partners.',
+    sub: 'The investor portal stays closed to everyone else and opens only by name. It is the one door the system keeps for the people already inside.',
+    mono: 'opened only by name',
     image: '/assets/imagery/club-humidor.jpg',
     alt: 'An interior of the MAS Partners Club',
     pos: 'center 50%',
@@ -167,7 +167,7 @@ function RecordsLedger({ reduced }: { reduced: boolean | null }) {
     >
       <div className="flex items-center gap-2.5 border-b border-[var(--hairline-gold-faint)] pb-2.5">
         <Heartbeat size={6} reduced={reduced} />
-        <span className="type-mono-detail text-gold-400">the ledger · writing</span>
+        <span className="type-mono-detail text-gold-400">the ledger, writing</span>
       </div>
       <ul className="mt-1 flex flex-col">
         {rows.map((r) =>
@@ -196,7 +196,7 @@ function RecordsLedger({ reduced }: { reduced: boolean | null }) {
 function Panel({ m, reduced }: { m: Movement; reduced: boolean | null }) {
   return (
     <section
-      aria-label={`${m.verb}`}
+      aria-label={m.verb}
       className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-navy-900"
     >
       <Image src={m.image} alt={m.alt} fill sizes="100vw" className="object-cover" style={{ objectPosition: m.pos }} />
@@ -264,10 +264,10 @@ export function EcosystemInstrument() {
           </Reveal>
           <Reveal delay={150}>
             <h1
-              className="type-display-xl max-w-[11em] text-balance text-stone-50"
+              className="type-display-xl max-w-[12em] text-balance text-stone-50"
               style={{ textShadow: '0 2px 30px rgba(6,15,29,0.7)' }}
             >
-              Not a website. An instrument.
+              Not just a website. A system that works for you.
             </h1>
           </Reveal>
           <Reveal delay={300}>
@@ -275,8 +275,9 @@ export function EcosystemInstrument() {
               className="type-lede max-w-[36em] text-navy-100"
               style={{ textShadow: '0 1px 16px rgba(6,15,29,0.55)' }}
             >
-              Mas Alpha is a working system — it greets, records, watches, reports, and invites, on its own.
-              Six functions, one current, every path ending at your desk.
+              The website does not only sit there and look good. It welcomes new partners, saves every inquiry,
+              follows the firm’s press, sends a brief to leadership each week, and writes personal invitations.
+              Everything it does comes back to your desk.
             </p>
           </Reveal>
           <Reveal delay={450}>
@@ -295,7 +296,7 @@ export function EcosystemInstrument() {
         <div className="content">
           <Reveal>
             <p className="type-display-md max-w-[18em] text-balance text-stone-50">
-              Six functions. One system. Every path ends at the partner-relations desk.
+              Six things it does for you. Every one of them comes back to your desk.
             </p>
           </Reveal>
           <Reveal delay={150}>
@@ -337,20 +338,20 @@ export function EcosystemInstrument() {
         <div className="content gutter relative flex w-full flex-col items-start gap-7 pb-24 pt-40">
           <div className="flex items-center gap-3">
             <Heartbeat size={11} reduced={reduced} />
-            <span className="type-mono-detail text-gold-300">the partner-relations desk</span>
+            <span className="type-mono-detail text-gold-300">the partner relations desk</span>
           </div>
           <Reveal>
             <h2
               className="type-display-lg max-w-[15em] text-balance text-stone-50"
               style={{ textShadow: '0 2px 26px rgba(6,15,29,0.6)' }}
             >
-              Six movements. One desk. Every path ends here.
+              Six jobs. One desk. It all comes back to you.
             </h2>
           </Reveal>
           <Reveal delay={150}>
             <p className="type-lede max-w-[40em] text-navy-100" style={{ textShadow: '0 1px 14px rgba(6,15,29,0.55)' }}>
-              Not a brochure that sits still — a system that greets, records, watches, reports, and invites,
-              and reports back to you. The website you are looking at is only its first instrument.
+              This is not a brochure that sits still. It is a system that works for the firm and reports back to
+              you. What you are looking at is only the first piece of it.
             </p>
           </Reveal>
           <Reveal delay={300}>
