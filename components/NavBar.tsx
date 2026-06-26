@@ -118,7 +118,7 @@ export function NavBar() {
             width={264}
             height={44}
             priority
-            className="h-11 w-auto [filter:drop-shadow(0_1px_10px_rgba(6,15,29,0.45))]"
+            className="h-14 w-auto [filter:drop-shadow(0_1px_10px_rgba(6,15,29,0.45))]"
           />
         </Link>
         <div className="ml-auto flex items-center gap-9 max-[900px]:hidden">
@@ -174,7 +174,7 @@ export function NavBar() {
                   alt="Mas Alpha Securities"
                   width={264}
                   height={44}
-                  className="h-11 w-auto"
+                  className="h-14 w-auto"
                 />
               </Link>
               <button
