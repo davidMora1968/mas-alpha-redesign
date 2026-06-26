@@ -99,10 +99,10 @@ export function Hero() {
         </Reveal>
         <Reveal delay={150}>
           <h1
-            className="type-display-lg max-w-[16em] text-stone-50"
+            className="type-display-xl max-w-[11em] text-stone-50"
             style={{ textShadow: '0 2px 30px rgba(6, 15, 29, 0.72), 0 1px 10px rgba(6, 15, 29, 0.55)' }}
           >
-            We acquire the irreplaceable, and hold it for generations.
+            We own what cannot be replaced.
           </h1>
         </Reveal>
         <Reveal delay={300}>
