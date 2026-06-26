@@ -26,12 +26,12 @@ export function Hero() {
 
   const bgImage = (
     <Image
-      src="/assets/imagery/brickell-skyline-hero.jpg"
-      alt="The Brickell skyline in Miami at dusk, above Biscayne Bay"
+      src="/assets/imagery/usa-night-orbit.jpg"
+      alt="The United States at night, seen from orbit, its cities lit in gold"
       fill
       priority
       className="object-cover"
-      style={{ objectPosition: 'center 50%' }}
+      style={{ objectPosition: 'center 42%' }}
       sizes="100vw"
       onLoad={() => setReady(true)}
       onError={() => setReady(true)} // never leave the hero dark
