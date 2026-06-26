@@ -38,7 +38,7 @@ export function Hero() {
     if (p) p.catch(() => {});
   }, [reduced]);
 
-  const POSTER = '/assets/imagery/hero-skyline-poster.jpg';
+  const POSTER = '/assets/imagery/hero-skyline-4k-poster.jpg';
 
   const bg = reduced ? (
     <Image
@@ -66,7 +66,7 @@ export function Hero() {
       onLoadedData={() => setReady(true)}
       onError={() => setReady(true)} // never leave the hero dark
     >
-      <source src="/assets/imagery/hero-skyline.mp4" type="video/mp4" />
+      <source src="/assets/imagery/hero-skyline-4k.mp4" type="video/mp4" />
     </video>
   );
 
