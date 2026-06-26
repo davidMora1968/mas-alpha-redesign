@@ -1,89 +1,93 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import {
-  motion,
-  useInView,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { Reveal, EASE_REVEAL } from '@/components/ui/Reveal';
 
 /* ------------------------------------------------------------------ *
- *  THE INSTRUMENT — /ecosystem
- *  One gold hairline runs down the left margin. A scroll-bound pulse of
- *  light travels it and ignites six movements; all of it ends at one desk.
- *  Gold is a 1px whisper; one ease for everything; no bounce.
- *  Fully composed under prefers-reduced-motion.
+ *  THE ECOSYSTEM — /ecosystem
+ *  A cinematic walk through the firm's working system: six full-bleed
+ *  movements over the firm's own imagery, one of them writing itself
+ *  live. Internal showcase (unlinked, noindexed).
  * ------------------------------------------------------------------ */
 
 const GOLD = '#C2A36B';
 
-// Shared rail geometry — the line, the nodes, and the content all key off these.
-const RAIL = 'left-[28px] md:left-[92px]';
-const PAD = 'pl-[64px] pr-[var(--page-gutter)] md:pl-[156px] md:pr-[8vw]';
-
-type Accent = 'aperture' | 'ledger' | 'watch' | 'report' | 'invite' | 'door';
-
-const MOVEMENTS: {
+type Movement = {
   num: string;
   verb: string;
   title: string;
   sub: string;
   mono: string;
-  accent: Accent;
-  apex?: boolean;
-}[] = [
+  image: string;
+  alt: string;
+  pos: string;
+  live?: boolean;
+};
+
+const MOVEMENTS: Movement[] = [
   {
     num: 'I',
     verb: 'Greets',
-    title: 'Arrival is acknowledged before a word is exchanged.',
-    sub: 'The site receives each visit composed and certain of itself — the firm’s first impression, kept by the system.',
-    mono: '— received',
-    accent: 'aperture',
+    title: 'It receives a partner before a word is exchanged.',
+    sub: 'Every arrival meets a digital home composed and certain of itself — the firm’s first impression, kept by the system, not left to chance.',
+    mono: 'visit → received',
+    image: '/assets/imagery/brickell-skyline-hero.jpg',
+    alt: 'The Brickell skyline at dusk',
+    pos: 'center 45%',
   },
   {
     num: 'II',
     verb: 'Records',
     title: 'Every inquiry is committed the instant it is written.',
-    sub: 'Nothing is lost between the page and the desk. Nothing is made public.',
-    mono: '→ partner-relations desk',
-    accent: 'ledger',
+    sub: 'A “Become a Partner” note lands in a sealed ledger the moment it is sent — nothing lost between the page and the desk, nothing made public.',
+    mono: 'inquiry → sealed → partner-relations desk',
+    image: '/assets/imagery/team-investor-night.jpg',
+    alt: 'The firm at work after hours',
+    pos: 'center 50%',
+    live: true,
   },
   {
     num: 'III',
     verb: 'Watches',
     title: 'It reads how the firm is named in the press — without rest.',
-    sub: 'A continuous, patient watch; what the world says is held before anyone has to look.',
-    mono: '→ partner-relations desk',
-    accent: 'watch',
+    sub: 'A continuous, patient watch over the firm’s coverage. What the world says is gathered and held before anyone on the desk has to go looking.',
+    mono: 'press → gathered → held',
+    image: '/assets/imagery/miami-shoreline.jpg',
+    alt: 'The Miami shoreline',
+    pos: 'center 55%',
   },
   {
     num: 'IV',
     verb: 'Reports',
-    title: 'Before the desk is staffed, the week’s reading is sealed and sent.',
-    sub: 'Composed overnight, delivered every Monday — written while leadership sleeps.',
+    title: 'Before the desk is staffed, the week is sealed and sent.',
+    sub: 'Composed overnight and delivered every Monday — inquiries, coverage, the week ahead — the firm briefing its own leadership while the office is still dark.',
     mono: 'composed · sent — mon 06:00 est',
-    accent: 'report',
-    apex: true,
+    image: '/assets/imagery/wyoming-range.avif',
+    alt: 'First light over the Wyoming range',
+    pos: 'center 50%',
   },
   {
     num: 'V',
     verb: 'Invites',
     title: 'Invitations drawn in the firm’s own hand.',
-    sub: 'Each carries the house name forward — stationery cream, a gold hairline, the seal of MAS Alpha.',
+    sub: 'A tool that issues a personal invitation for a named prospect — stationery cream, a gold hairline, the seal of MAS Alpha. Outreach that feels chosen, not marketed.',
     mono: '— for the attention of —',
-    accent: 'invite',
+    image: '/assets/imagery/club-night-pavilion.jpg',
+    alt: 'The MAS Partners Club pavilion at night',
+    pos: 'center 50%',
   },
   {
     num: 'VI',
     verb: 'Opens',
     title: 'One door, kept for those it has chosen.',
-    sub: 'The investor portal — closed to all others, opened only by name.',
-    mono: 'open',
-    accent: 'door',
+    sub: 'The investor portal — closed to all others, opened only by name. The single threshold the system keeps for the partners already inside.',
+    mono: 'portal → opened by name',
+    image: '/assets/imagery/club-humidor.jpg',
+    alt: 'An interior of the MAS Partners Club',
+    pos: 'center 50%',
   },
 ];
 
@@ -98,7 +102,7 @@ function Heartbeat({ size = 7, reduced }: { size?: number; reduced: boolean | nu
         style={{ width: halo, height: halo, background: 'radial-gradient(circle, rgba(194,163,107,0.4), transparent 68%)' }}
       />
       {reduced ? (
-        <span className="rounded-full" style={{ width: size, height: size, background: GOLD, opacity: 0.8 }} />
+        <span className="rounded-full" style={{ width: size, height: size, background: GOLD, opacity: 0.85 }} />
       ) : (
         <motion.span
           className="rounded-full"
@@ -135,8 +139,7 @@ function pad(n: number) {
   return n.toString().padStart(2, '0');
 }
 function stamp(i: number) {
-  // Pure arithmetic, always increasing — no Date (avoids hydration drift).
-  const m = 4 * 60 + 12 + i * 37; // from 04:12, ~37-min gaps
+  const m = 4 * 60 + 12 + i * 37; // from 04:12, ~37-min gaps; pure arithmetic (no hydration drift)
   return `mon ${pad(Math.floor(m / 60) % 24)}:${pad(m % 60)} · inquiry · sealed`;
 }
 
@@ -158,12 +161,15 @@ function RecordsLedger({ reduced }: { reduced: boolean | null }) {
   }, [reduced, inView]);
 
   return (
-    <div ref={ref} className="mt-9 w-full max-w-[360px]">
-      <div className="flex items-center gap-2.5 border-b border-[var(--hairline-gold-faint)] pb-2">
+    <div
+      ref={ref}
+      className="mt-2 w-full max-w-[400px] border border-[var(--hairline-gold-faint)] bg-[rgba(6,15,29,0.6)] p-5 backdrop-blur-sm"
+    >
+      <div className="flex items-center gap-2.5 border-b border-[var(--hairline-gold-faint)] pb-2.5">
         <Heartbeat size={6} reduced={reduced} />
-        <span className="type-mono-detail text-navy-300">the ledger · writing</span>
+        <span className="type-mono-detail text-gold-400">the ledger · writing</span>
       </div>
-      <ul className="mt-1.5 flex flex-col">
+      <ul className="mt-1 flex flex-col">
         {rows.map((r) =>
           reduced ? (
             <li key={r.id} className="type-mono-detail border-b border-[var(--hairline-on-dark)] py-2 text-navy-100">
@@ -186,286 +192,173 @@ function RecordsLedger({ reduced }: { reduced: boolean | null }) {
   );
 }
 
-/* --------------------------- station accents ------------------------ */
-const STROKE = { stroke: GOLD, strokeWidth: 1, fill: 'none', strokeOpacity: 0.55 } as const;
-const DRAW = {
-  initial: { pathLength: 0 },
-  whileInView: { pathLength: 1 },
-  viewport: { once: true, amount: 0.6 },
-} as const;
-
-function Accent({ accent, reduced }: { accent: Accent; reduced: boolean | null }) {
-  if (accent === 'ledger') return <RecordsLedger reduced={reduced} />;
-
-  if (accent === 'aperture')
-    return (
-      <svg width="64" height="64" viewBox="0 0 64 64" className="mt-9" aria-hidden="true">
-        {reduced ? (
-          <circle cx="32" cy="32" r="22" {...STROKE} />
-        ) : (
-          <motion.circle cx="32" cy="32" r="22" {...STROKE} {...DRAW} transition={{ duration: 1, ease: EASE_REVEAL }} />
-        )}
-        <circle cx="32" cy="32" r="2" fill={GOLD} fillOpacity={0.8} />
-      </svg>
-    );
-
-  if (accent === 'watch')
-    return (
-      <div className="mt-9 flex w-full max-w-[320px] flex-col gap-3">
-        {[0, 1, 2].map((i) => (
-          <Reveal key={i} delay={i * 120}>
-            <div className="h-9 border border-[var(--hairline-gold-faint)]" />
-          </Reveal>
-        ))}
-      </div>
-    );
-
-  if (accent === 'report')
-    return (
-      <svg width="120" height="86" viewBox="0 0 120 86" className="mt-9" aria-hidden="true">
-        {reduced ? (
-          <>
-            <rect x="8" y="14" width="104" height="64" {...STROKE} />
-            <path d="M8 14 L60 50 L112 14" {...STROKE} />
-            <circle cx="60" cy="50" r="5" fill={GOLD} fillOpacity={0.85} />
-          </>
-        ) : (
-          <>
-            <motion.rect x="8" y="14" width="104" height="64" {...STROKE} {...DRAW} transition={{ duration: 1, ease: EASE_REVEAL }} />
-            <motion.path d="M8 14 L60 50 L112 14" {...STROKE} {...DRAW} transition={{ duration: 0.8, ease: EASE_REVEAL, delay: 0.5 }} />
-            <motion.circle
-              cx="60"
-              cy="50"
-              r="5"
-              fill={GOLD}
-              fillOpacity={0.85}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.5, ease: EASE_REVEAL, delay: 1.2 }}
-              style={{ transformOrigin: '60px 50px' }}
-            />
-          </>
-        )}
-      </svg>
-    );
-
-  if (accent === 'invite')
-    return (
-      <div className="mt-9 w-full max-w-[300px]">
-        <svg width="100%" viewBox="0 0 300 150" aria-hidden="true">
-          {reduced ? (
-            <rect x="1" y="1" width="298" height="148" {...STROKE} />
-          ) : (
-            <motion.rect x="1" y="1" width="298" height="148" {...STROKE} {...DRAW} transition={{ duration: 1.1, ease: EASE_REVEAL }} />
-          )}
-          <line x1="40" y1="92" x2="260" y2="92" stroke={GOLD} strokeWidth={1} strokeOpacity={0.3} />
-          <circle cx="150" cy="118" r="9" {...STROKE} />
-          <circle cx="150" cy="118" r="2" fill={GOLD} fillOpacity={0.7} />
-          <text
-            x="150"
-            y="64"
-            textAnchor="middle"
-            fill="#FAF7F0"
-            style={{ font: 'italic 300 16px var(--font-serif-display)' }}
-          >
-            for the attention of
-          </text>
-        </svg>
-      </div>
-    );
-
-  // door
+/* ----------------------------- a movement --------------------------- */
+function Panel({ m, reduced }: { m: Movement; reduced: boolean | null }) {
   return (
-    <div className="relative mt-9 h-[150px] w-[120px]" aria-hidden="true">
+    <section
+      aria-label={`${m.verb}`}
+      className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-navy-900"
+    >
+      <Image src={m.image} alt={m.alt} fill sizes="100vw" className="object-cover" style={{ objectPosition: m.pos }} />
+      <div aria-hidden="true" className="absolute inset-0" style={{ background: 'var(--scrim-panel)' }} />
       <div
-        className="absolute inset-0 m-auto h-[120px] w-[80px]"
-        style={{ background: 'radial-gradient(circle, rgba(250,247,240,0.16), transparent 70%)' }}
-      />
-      <motion.div
-        className="absolute top-[15px] h-[120px] w-[36px] border border-[var(--hairline-gold)]"
-        style={{ left: 24 }}
-        initial={reduced ? false : { x: 0 }}
-        whileInView={reduced ? undefined : { x: -6 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1, ease: EASE_REVEAL, delay: 0.3 }}
-      />
-      <motion.div
-        className="absolute top-[15px] h-[120px] w-[36px] border border-[var(--hairline-gold)]"
-        style={{ right: 24 }}
-        initial={reduced ? false : { x: 0 }}
-        whileInView={reduced ? undefined : { x: 6 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1, ease: EASE_REVEAL, delay: 0.3 }}
-      />
-      <span className="type-mono-detail absolute inset-x-0 top-[64px] text-center text-stone-50">open</span>
-    </div>
-  );
-}
-
-/* ------------------------------- station ---------------------------- */
-function Station({ m, reduced }: { m: (typeof MOVEMENTS)[number]; reduced: boolean | null }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.45 });
-
-  return (
-    <div ref={ref} className="relative py-[12vh] first:pt-[8vh]">
-      {/* node where the station meets the rail */}
-      <span
         aria-hidden="true"
-        className={`absolute top-[12vh] h-2 w-2 -translate-x-1/2 rounded-full transition-[opacity,box-shadow] duration-700 ${RAIL}`}
-        style={{
-          background: GOLD,
-          opacity: inView || reduced ? 0.95 : 0.28,
-          boxShadow: inView && !reduced ? '0 0 14px 2px rgba(194,163,107,0.45)' : 'none',
-        }}
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(90deg, rgba(6,15,29,0.7) 0%, rgba(6,15,29,0.25) 42%, transparent 68%)' }}
       />
-      <div className={`flex flex-col gap-5 ${PAD}`}>
+      <div className="content gutter relative flex w-full flex-col items-start gap-6 pb-24 pt-40">
         <Reveal>
           <div className="type-eyebrow text-gold-400">
             {m.num} · {m.verb}
           </div>
         </Reveal>
         <Reveal delay={120}>
-          <h2 className={`${m.apex ? 'type-display-lg' : 'type-display-md'} max-w-[15em] text-balance text-stone-50`}>
+          <h2
+            className="type-display-lg max-w-[16em] text-balance text-stone-50"
+            style={{ textShadow: '0 2px 26px rgba(6,15,29,0.6)' }}
+          >
             {m.title}
           </h2>
         </Reveal>
-        <Reveal delay={220}>
-          <p className="type-body-sm max-w-[32em] text-navy-300">{m.sub}</p>
+        <Reveal delay={240}>
+          <p className="type-lede max-w-[34em] text-navy-100" style={{ textShadow: '0 1px 14px rgba(6,15,29,0.55)' }}>
+            {m.sub}
+          </p>
         </Reveal>
-        <Reveal delay={300}>
-          <div className="flex flex-col items-start gap-3">
-            <Accent accent={m.accent} reduced={reduced} />
-            <span className="type-mono-detail mt-3 text-navy-300">{m.mono}</span>
-          </div>
+        {m.live && <RecordsLedger reduced={reduced} />}
+        <Reveal delay={360}>
+          <span className="type-mono-detail text-gold-300">{m.mono}</span>
         </Reveal>
       </div>
-    </div>
+    </section>
   );
 }
 
 /* --------------------------------- page ----------------------------- */
 export function EcosystemInstrument() {
   const reduced = useReducedMotion();
-  const railRef = useRef<HTMLDivElement>(null);
   const clock = useEstClock(reduced);
-
-  const { scrollYProgress } = useScroll({ target: railRef, offset: ['start center', 'end center'] });
-  const pulseTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const poweredHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <main id="main" tabIndex={-1} className="scroll-mt-[92px] overflow-hidden bg-navy-950">
       {/* ============================ HERO ============================ */}
-      <section className="relative flex h-screen min-h-[660px] flex-col justify-center overflow-hidden">
-        {/* hero rail — dormant full height, a one-time "power on" sweep, heartbeat node */}
-        <div className={`absolute top-0 h-full w-px -translate-x-1/2 ${RAIL}`} aria-hidden="true">
-          <div className="absolute inset-0" style={{ background: 'rgba(194,163,107,0.18)' }} />
-          {!reduced && (
-            <motion.div
-              className="absolute inset-x-0 top-0 origin-top"
-              style={{ height: '100%', background: 'linear-gradient(180deg, rgba(194,163,107,0.6), transparent 60%)' }}
-              initial={{ scaleY: 0, opacity: 1 }}
-              animate={{ scaleY: 1, opacity: [1, 1, 0] }}
-              transition={{ scaleY: { duration: 2.4, ease: EASE_REVEAL }, opacity: { duration: 1.1, delay: 2.2 } }}
-            />
-          )}
-        </div>
-        <div className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 ${RAIL}`} aria-hidden="true">
-          <Heartbeat size={9} reduced={reduced} />
-        </div>
-
-        <div className={PAD}>
+      <section className="relative flex h-screen min-h-[660px] flex-col justify-end overflow-hidden bg-navy-950">
+        <Image
+          src="/assets/imagery/miami-skyline-hero.jpg"
+          alt="The Miami skyline at dusk"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: 'center 48%' }}
+        />
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: 'var(--scrim-hero)' }} />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(90deg, rgba(6,15,29,0.72) 0%, rgba(6,15,29,0.28) 44%, transparent 70%)' }}
+        />
+        <div className="content gutter relative flex w-full flex-col items-start gap-7 pb-24">
           <Reveal>
-            <div className="type-eyebrow text-navy-300">The Instrument — always running</div>
+            <div className="type-eyebrow text-gold-400">The Ecosystem</div>
           </Reveal>
           <Reveal delay={150}>
-            <h1 className="type-display-xl mt-8 max-w-[11em] text-balance text-stone-50">
-              It does not sleep when leadership does.
+            <h1
+              className="type-display-xl max-w-[11em] text-balance text-stone-50"
+              style={{ textShadow: '0 2px 30px rgba(6,15,29,0.7)' }}
+            >
+              Not a website. An instrument.
             </h1>
           </Reveal>
           <Reveal delay={300}>
-            <p className="type-lede mt-8 max-w-[34em] text-navy-100">
-              Mas Alpha is no longer a website. It is a working system — receiving, recording, watching, and
-              reporting on its own. What follows is the current, traced end to end.
+            <p
+              className="type-lede max-w-[36em] text-navy-100"
+              style={{ textShadow: '0 1px 16px rgba(6,15,29,0.55)' }}
+            >
+              Mas Alpha is a working system — it greets, records, watches, reports, and invites, on its own.
+              Six functions, one current, every path ending at your desk.
             </p>
           </Reveal>
           <Reveal delay={450}>
-            <div className="mt-9 flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5">
               <Heartbeat size={6} reduced={reduced} />
-              <span className="type-mono-detail text-navy-300" suppressHydrationWarning>
+              <span className="type-mono-detail text-navy-100" suppressHydrationWarning>
                 system active · {clock} est
               </span>
             </div>
           </Reveal>
-          <Reveal delay={600}>
-            <div className="type-mono-detail mt-14 text-navy-300/70">↓ trace the current</div>
+        </div>
+      </section>
+
+      {/* ====================== INDEX / OVERVIEW ===================== */}
+      <section className="gutter border-y border-[var(--hairline-gold-faint)] bg-navy-950 py-20">
+        <div className="content">
+          <Reveal>
+            <p className="type-display-md max-w-[18em] text-balance text-stone-50">
+              Six functions. One system. Every path ends at the partner-relations desk.
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-[var(--hairline-gold-faint)] pt-7">
+              {MOVEMENTS.map((m) => (
+                <span key={m.num} className="type-eyebrow inline-flex items-baseline gap-2.5 text-navy-300">
+                  <span className="text-gold-400" style={{ font: '300 13px/1 var(--font-serif-display)' }}>
+                    {m.num}
+                  </span>
+                  {m.verb}
+                </span>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ===================== STATIONS + THE DESK ==================== */}
-      <section ref={railRef} className="relative">
-        {/* dormant rail */}
-        <div
-          aria-hidden="true"
-          className={`absolute bottom-0 top-0 w-px -translate-x-1/2 ${RAIL}`}
-          style={{ background: 'rgba(194,163,107,0.18)' }}
-        />
-        {/* powered segment — fills from top to the pulse as you scroll */}
-        <motion.div
-          aria-hidden="true"
-          className={`absolute top-0 w-px -translate-x-1/2 ${RAIL}`}
-          style={{
-            height: reduced ? '100%' : poweredHeight,
-            background: 'linear-gradient(180deg, transparent, rgba(194,163,107,0.55))',
-          }}
-        />
-        {/* the travelling pulse */}
-        <motion.div
-          aria-hidden="true"
-          className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 ${RAIL}`}
-          style={{ top: reduced ? '100%' : pulseTop }}
-        >
-          <span
-            className="block rounded-full"
-            style={{ width: 9, height: 9, background: GOLD, boxShadow: '0 0 18px 5px rgba(194,163,107,0.45)' }}
-          />
-        </motion.div>
-
-        {MOVEMENTS.map((m) => (
-          <Station key={m.num} m={m} reduced={reduced} />
-        ))}
-
-        {/* the desk — every path terminates here */}
-        <div className="relative pb-[10vh] pt-[4vh]">
-          <span className={`absolute top-[4vh] -translate-x-1/2 ${RAIL}`} aria-hidden="true">
-            <Heartbeat size={13} reduced={reduced} />
-          </span>
-          <div className={PAD}>
-            <span className="type-mono-detail text-gold-400">the partner-relations desk</span>
-          </div>
-        </div>
-      </section>
+      {/* ========================= MOVEMENTS ======================== */}
+      {MOVEMENTS.map((m) => (
+        <Panel key={m.num} m={m} reduced={reduced} />
+      ))}
 
       {/* ========================== CLOSING ========================= */}
-      <section className={`flex flex-col gap-8 pb-40 pt-[6vh] ${PAD}`}>
-        <Reveal>
-          <h2 className="type-display-lg max-w-[16em] text-balance text-stone-50">
-            Six movements. One desk. Every path ends here.
-          </h2>
-        </Reveal>
-        <Reveal delay={150}>
-          <p className="type-mono-detail max-w-[44em] text-navy-300">
-            Mas Alpha Securities · the instrument runs whether or not you are watching.
-          </p>
-        </Reveal>
-        <Reveal delay={300}>
-          <Link href="/portal" className="ma-portal-link type-button inline-block text-stone-50 no-underline">
-            Enter the Portal →
-          </Link>
-        </Reveal>
+      <section className="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-navy-950">
+        <Image
+          src="/assets/imagery/brickell-skyline-hero.jpg"
+          alt="The Brickell skyline at dusk"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: 'center 42%' }}
+        />
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: 'var(--scrim-panel)' }} />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(90deg, rgba(6,15,29,0.74) 0%, rgba(6,15,29,0.3) 44%, transparent 70%)' }}
+        />
+        <div className="content gutter relative flex w-full flex-col items-start gap-7 pb-24 pt-40">
+          <div className="flex items-center gap-3">
+            <Heartbeat size={11} reduced={reduced} />
+            <span className="type-mono-detail text-gold-300">the partner-relations desk</span>
+          </div>
+          <Reveal>
+            <h2
+              className="type-display-lg max-w-[15em] text-balance text-stone-50"
+              style={{ textShadow: '0 2px 26px rgba(6,15,29,0.6)' }}
+            >
+              Six movements. One desk. Every path ends here.
+            </h2>
+          </Reveal>
+          <Reveal delay={150}>
+            <p className="type-lede max-w-[40em] text-navy-100" style={{ textShadow: '0 1px 14px rgba(6,15,29,0.55)' }}>
+              Not a brochure that sits still — a system that greets, records, watches, reports, and invites,
+              and reports back to you. The website you are looking at is only its first instrument.
+            </p>
+          </Reveal>
+          <Reveal delay={300}>
+            <Link href="/portal" className="ma-portal-link type-button inline-block text-stone-50 no-underline">
+              Enter the Portal →
+            </Link>
+          </Reveal>
+        </div>
       </section>
     </main>
   );
