@@ -99,10 +99,10 @@ export function Hero() {
         </Reveal>
         <Reveal delay={150}>
           <h1
-            className="type-display-xl max-w-[11em] text-stone-50"
+            className="type-display-xl max-w-[12em] text-stone-50 max-[480px]:text-[clamp(38px,11vw,52px)]"
             style={{ textShadow: '0 2px 30px rgba(6, 15, 29, 0.72), 0 1px 10px rgba(6, 15, 29, 0.55)' }}
           >
-            Where preparation meets opportunity.
+            We acquire the irreplaceable, and hold it for generations.
           </h1>
         </Reveal>
         <Reveal delay={300}>
@@ -110,8 +110,8 @@ export function Hero() {
             className="type-lede max-w-[32em] text-navy-100"
             style={{ textShadow: '0 1px 18px rgba(6, 15, 29, 0.6), 0 1px 6px rgba(6, 15, 29, 0.55)' }}
           >
-            Mas Alpha Securities deploys private capital to acquire premier infrastructure assets
-            across the United States.
+            Mas Alpha Securities invests across public and private markets, in irreplaceable assets
+            with substantial barriers to entry, held without a predefined horizon.
           </p>
         </Reveal>
         <Reveal delay={450}>
